@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Space+Grotesk:wght@300;500;700&amp;family=Work+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#d7e3f9",
+              "primary": "#ffe2ab",
+              "on-secondary-fixed": "#101c2c",
+              "surface-variant": "#353534",
+              "inverse-on-surface": "#313030",
+              "surface-tint": "#fbbc00",
+              "on-background": "#e5e2e1",
+              "surface-bright": "#393939",
+              "outline": "#9c8f78",
+              "secondary-fixed-dim": "#bbc7dc",
+              "secondary": "#bbc7dc",
+              "inverse-surface": "#e5e2e1",
+              "on-primary-container": "#6d5000",
+              "on-surface-variant": "#d4c5ab",
+              "on-surface": "#e5e2e1",
+              "on-primary-fixed": "#261a00",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "primary-container": "#ffbf00",
+              "on-primary-fixed-variant": "#5c4300",
+              "surface-container-highest": "#353534",
+              "on-tertiary-container": "#a61b10",
+              "outline-variant": "#504532",
+              "tertiary-fixed": "#ffdad4",
+              "primary-fixed": "#ffdfa0",
+              "surface-dim": "#131313",
+              "on-secondary-container": "#adb9ce",
+              "background": "#131313",
+              "surface-container-low": "#1c1b1b",
+              "on-tertiary-fixed": "#410000",
+              "surface-container-lowest": "#0e0e0e",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#3c4859",
+              "tertiary-fixed-dim": "#ffb4a8",
+              "secondary-container": "#3e4a5b",
+              "error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#920703",
+              "on-tertiary": "#690000",
+              "tertiary-container": "#ffb8ad",
+              "tertiary": "#ffded9",
+              "surface-container": "#201f1f",
+              "surface-container-high": "#2a2a2a",
+              "surface": "#131313",
+              "primary-fixed-dim": "#fbbc00",
+              "on-secondary": "#253141",
+              "inverse-primary": "#795900",
+              "on-primary": "#402d00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Work Sans"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .parchment-mask {
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+        .etched-input {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 border-b border-[#504532]/20 bg-gradient-to-b from-[#1c1b1b] to-[#131313] shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">fort</span>
+<h1 class="text-xl font-bold text-[#ffe2ab] drop-shadow-[0_0_8px_rgba(255,191,0,0.4)] font-headline tracking-tight">Relic &amp; Rune</h1>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label uppercase text-[10px] font-bold tracking-widest px-4 py-2 rounded-lg hover:bg-primary transition-all active:scale-95 shadow-[0_0_15px_rgba(255,191,0,0.2)]">
+            Register Team
+        </button>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto space-y-6">
+<!-- Status Banner -->
+<section class="bg-error-container/20 border border-on-tertiary-container/30 rounded-xl p-4 flex items-center justify-between overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-on-tertiary-container/10 to-transparent"></div>
+<div class="relative flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">report</span>
+<div>
+<p class="font-label uppercase text-[10px] tracking-widest text-tertiary/70">Current Team Status</p>
+<p class="font-headline font-bold text-tertiary">NOT REGISTERED</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary/30 text-4xl">skull</span>
+</section>
+<!-- Dungeon List -->
+<div class="space-y-8">
+<h2 class="font-headline text-2xl font-bold text-primary px-2">Active Quests</h2>
+<!-- Card 1: Crystal Caverns -->
+<article class="relative bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-xl group">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]"></div>
+<div class="h-32 w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Glowing blue crystal cavern interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANTSBNki1sBRqFLJPI2eYPqz2pszADYsPckPByTazFGTJhsKZm4awpJt-LmquZhekkZxCOhxrtfLW_B5kl2dtHxB0Ck09SbkQRcp98uONxC8HJY89XmSIIOCrqcaLWLY53QSiSIdtcCUoM0JFkFOtSN0VjOk90Tx0Ojammb_xIwXdKh_pNxdkgzUJ2SNM8UokKWb9R-UH5ocvi1BiyZrTA2-Nvw7btV3qXxK_NFuhv8-6XKNZdgiVfSZbn8Nrgb5vRRm505j8PC9e3"/>
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5 relative -mt-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Crystal Caverns</h3>
+<div class="flex flex-col items-end">
+<span class="font-label text-[10px] uppercase text-secondary">Reward Class</span>
+<span class="font-body text-sm font-semibold text-secondary-fixed-dim">Rogue</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Venture into the humming depths where shadows dance among the pulsating quartz.</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label text-xs font-bold text-primary">30 Agility</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">swords</span>
+<span class="font-label text-xs font-bold text-secondary">Dagger of Speed</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Goblin Fortress -->
+<article class="relative bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-xl group">
+<div class="h-32 w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Stone fortress ruins at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhJ97Nizt-yIrdaOWaH_5ofxRwklH2WHxgLmuRIpc4efZ0J4yRhmI_Z2Kj2MY-x--vuwh9OXG8MvsyhQv5WPwwdVrEQMtCmR2xAzuw3kZyj0s_tjFrc3yp5Wnl1LM-AnPOnJKnnLNUy2h81LCwKiAXwChiavQAeVA8RY7V2yoiMo2FHq9Ir8YIBJESYF2mYpaV58JouFZD6NLEOhqB_2moHDP4BQ5VWpyFZJ2qO6dhV9Ssg4RuYWcMR8Y05L70q8mkbbP_e0h3W5Mx"/>
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5 relative -mt-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Goblin Fortress</h3>
+<div class="flex flex-col items-end">
+<span class="font-label text-[10px] uppercase text-secondary">Reward Class</span>
+<span class="font-body text-sm font-semibold text-secondary-fixed-dim">Warrior</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Breach the iron gates of the green-skin's ramshackle stronghold.</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="font-label text-xs font-bold text-primary">45 Strength</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">shield</span>
+<span class="font-label text-xs font-bold text-secondary">Iron Bulwark</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Sunken Ruins -->
+<article class="relative bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-xl group">
+<div class="h-32 w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Underwater stone pillars and kelp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYqhT1Zx59Wy8DNQVKL0_jz9f6UDI-xBhe3SW_Ez9GXaSvIGWTfoDs-LeVQZd1f2mzhfKUbQBmwPfmdxuaXMaLNdGCDPVeFKM4L3GGmlJaQU3xMVm2Pb-lECUJLB9tGb_nGm0jCgU7A7kc7SZkZ2DrJMqCTorcqigyc12dXXjcLtmvigPb91hBR4U6bZCkGrPQ_mZCnzgt6xOfm0AeV183USqMZLCMCdogIN1uMGxozMfXtwpSwH1Aj9E6XoY6EqI-COeWrKj1qQak"/>
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5 relative -mt-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Sunken Ruins</h3>
+<div class="flex flex-col items-end">
+<span class="font-label text-[10px] uppercase text-secondary">Reward Class</span>
+<span class="font-body text-sm font-semibold text-secondary-fixed-dim">Mage</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">The lost capital of Atlantis calls. Hold your breath and find the truth.</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="font-label text-xs font-bold text-primary">50 Intellect</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">auto_fix_high</span>
+<span class="font-label text-xs font-bold text-secondary">Tidal Staff</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4: Wolven Woods -->
+<article class="relative bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-xl group">
+<div class="h-32 w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Dark misty forest with giant pines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6mFVgbh-x0dIVgnL_2QDMrzwYWJZQx79HZh7dw17ayzC2IHzhys1wjsVdhDky5jdw0t_EkIZVTplDTJjgusgxzocpNjd26BBelsLF0gRuQ4AAwpt73o419_9j0Va1Y2W1Qu5t_rZbDVDLP8zn_yfD9XpzTchwrvJWVvJHeLcHc9RJqXmU89hY3on_wKpcC1ebDvvpW94BxQySn_RbaUluAKUDPrHa8-Jqh8XodEvc0jeHfjfsIRU2mInKYgkKST0kgaMxjYb5XZ0"/>
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5 relative -mt-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Wolven Woods</h3>
+<div class="flex flex-col items-end">
+<span class="font-label text-[10px] uppercase text-secondary">Reward Class</span>
+<span class="font-body text-sm font-semibold text-secondary-fixed-dim">Ranger</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Hunt the hunters in the evergreen labyrinth of the moon-cursed.</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<span class="font-label text-xs font-bold text-primary">40 Perception</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">rebase_edit</span>
+<span class="font-label text-xs font-bold text-secondary">Oak Longbow</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 5: Tower of the Damned -->
+<article class="relative bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10 shadow-xl group">
+<div class="h-32 w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="High gothic stone tower against red sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8AtNbZ0ixLDfTFm5J7kbRq-6ifICayx4Eg8JubMIyWadyL_P0hmjDCobHJUZ_GFlEP4hEJUQVqMqP50IY0oQCtfRND8LisOD2acrElvCEjqCYdKRkGmvQGgDYnX1UM6Zq--xYBBfM74DKoMYznAQIyzSAv5TY7pViIa0p_oyZASGOLyV--riBR9oDWa_R0Kul5YhE9ry8ZAoQysQUEQPm-Z7TM-nJKZVcw3zKc2AvCQNkH2jR5i1GWcHfDz-2LZ1HsUD0XHx0QY7w"/>
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-5 relative -mt-8">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Tower of the Damned</h3>
+<div class="flex flex-col items-end">
+<span class="font-label text-[10px] uppercase text-secondary">Reward Class</span>
+<span class="font-body text-sm font-semibold text-secondary-fixed-dim">Paladin</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Climb the spire of whispers where the restless souls of kings linger.</p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">shield_moon</span>
+<span class="font-label text-xs font-bold text-primary">60 Faith</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">flare</span>
+<span class="font-label text-xs font-bold text-secondary">Holy Relic</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Boss Section -->
+<section class="mt-12 bg-surface-container-highest/30 rounded-2xl border border-outline-variant/30 p-8 text-center relative overflow-hidden">
+<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_rgba(166,27,16,0.1)_0%,_transparent_70%)]"></div>
+<span class="material-symbols-outlined text-on-tertiary-container/40 text-6xl mb-4 block">lock</span>
+<h2 class="font-headline text-3xl font-bold text-on-surface-variant mb-2">Final Boss: The Dragon</h2>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-tertiary-container mb-6 italic">Requires All 5 Dungeon Seals</p>
+<button class="w-full bg-surface-container-high text-on-surface-variant/40 font-label uppercase text-sm font-bold tracking-widest py-4 rounded-xl border border-outline-variant/20 cursor-not-allowed" disabled="">
+                Challenge Boss
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#1c1b1b]/95 backdrop-blur-md rounded-t-xl border-t border-[#504532]/30 shadow-[0_-8px_32px_rgba(0,0,0,0.8)]">
+<div class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#ffe2ab] bg-[#ffbf00]/20 rounded-xl py-1 px-3 shadow-[0_0_15px_rgba(255,191,0,0.2)] animate-pulse duration-500">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Quests</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Ledger</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">sports_bar</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Tavern</span>
+</div>
+</nav>
+</body></html>

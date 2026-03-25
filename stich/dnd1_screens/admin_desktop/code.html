@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcane Command - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&amp;family=Space+Grotesk:wght@300;500;700&amp;family=Work+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .noto-serif { font-family: 'Noto Serif', serif; }
+        .space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+        .work-sans { font-family: 'Work Sans', sans-serif; }
+        
+        .parchment-texture {
+            background-color: #d4c5ab;
+            background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+            position: relative;
+        }
+        
+        .torn-edge {
+            clip-path: polygon(0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 2%, 30% 5%, 35% 2%, 40% 4%, 45% 1%, 50% 3%, 55% 0%, 60% 4%, 65% 2%, 70% 5%, 75% 2%, 80% 4%, 85% 1%, 90% 3%, 95% 0%, 100% 2%, 100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 98%, 70% 95%, 65% 98%, 60% 96%, 55% 100%, 50% 97%, 45% 99%, 40% 96%, 35% 98%, 30% 95%, 25% 97%, 20% 96%, 15% 99%, 10% 97%, 5% 100%, 0% 98%);
+        }
+
+        .ember {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: #ffe2ab;
+            pointer-events: none;
+            opacity: 0.4;
+            filter: blur(1px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "tertiary-fixed-dim": "#ffb4a8",
+                "surface": "#131313",
+                "inverse-primary": "#795900",
+                "secondary-fixed-dim": "#bbc7dc",
+                "on-tertiary-fixed": "#410000",
+                "on-primary-fixed-variant": "#5c4300",
+                "surface-container-highest": "#353534",
+                "secondary-container": "#3e4a5b",
+                "on-error": "#690005",
+                "outline-variant": "#504532",
+                "primary-container": "#ffbf00",
+                "on-primary": "#402d00",
+                "error": "#ffb4ab",
+                "on-tertiary": "#690000",
+                "surface-container-low": "#1c1b1b",
+                "secondary": "#bbc7dc",
+                "on-secondary-container": "#adb9ce",
+                "error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#920703",
+                "background": "#131313",
+                "outline": "#9c8f78",
+                "on-secondary-fixed": "#101c2c",
+                "on-secondary-fixed-variant": "#3c4859",
+                "on-error-container": "#ffdad6",
+                "on-primary-fixed": "#261a00",
+                "inverse-on-surface": "#313030",
+                "on-surface-variant": "#d4c5ab",
+                "on-background": "#e5e2e1",
+                "surface-container": "#201f1f",
+                "primary-fixed": "#ffdfa0",
+                "tertiary-fixed": "#ffdad4",
+                "on-tertiary-container": "#a61b10",
+                "surface-tint": "#fbbc00",
+                "tertiary": "#ffded9",
+                "surface-variant": "#353534",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-high": "#2a2a2a",
+                "tertiary-container": "#ffb8ad",
+                "inverse-surface": "#e5e2e1",
+                "primary-fixed-dim": "#fbbc00",
+                "surface-dim": "#131313",
+                "secondary-fixed": "#d7e3f9",
+                "on-surface": "#e5e2e1",
+                "primary": "#ffe2ab",
+                "surface-bright": "#393939",
+                "on-primary-container": "#6d5000",
+                "on-secondary": "#253141"
+              },
+              fontFamily: {
+                "headline": ["Noto Serif"],
+                "body": ["Work Sans"],
+                "label": ["Space Grotesk"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-background work-sans selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<!-- Ambient Particles Simulation -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+<div class="ember" style="top: 10%; left: 20%;"></div>
+<div class="ember" style="top: 40%; left: 80%;"></div>
+<div class="ember" style="top: 70%; left: 10%;"></div>
+<div class="ember" style="top: 85%; left: 50%;"></div>
+<div class="ember" style="top: 30%; left: 40%;"></div>
+</div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313] dark:bg-neutral-950 backdrop-blur-md bg-opacity-90 border-b border-amber-900/20 shadow-xl shadow-amber-900/10 h-20">
+<div class="flex justify-between items-center px-8 h-full w-full mx-auto max-w-[1920px]">
+<div class="text-2xl font-bold tracking-widest text-amber-400 dark:text-amber-300 uppercase font-headline">
+                ARCANE COMMAND
+            </div>
+<div class="hidden md:flex items-center gap-8 font-serif noto-serif tracking-tight text-lg">
+<a class="text-stone-400 dark:text-stone-500 hover:text-amber-200 transition-colors hover:scale-105 duration-300 ease-out active:scale-95" href="#">Home</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-amber-200 transition-colors hover:scale-105 duration-300 ease-out active:scale-95" href="#">Quests</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-amber-200 transition-colors hover:scale-105 duration-300 ease-out active:scale-95" href="#">Ledger</a>
+<a class="text-stone-400 dark:text-stone-500 hover:text-amber-200 transition-colors hover:scale-105 duration-300 ease-out active:scale-95" href="#">Tavern</a>
+<a class="text-amber-400 dark:text-amber-300 border-b-2 border-amber-500 pb-1 font-bold" href="#">Admin</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-amber-200 hover:text-amber-300 transition-all duration-300 active:scale-95">settings</button>
+<button class="material-symbols-outlined text-amber-200 hover:text-amber-300 transition-all duration-300 active:scale-95">notifications</button>
+<div class="w-10 h-10 rounded-full border-2 border-amber-900/50 overflow-hidden">
+<img alt="Game Master Avatar" class="w-full h-full object-cover" data-alt="Close up of a mysterious hooded figure in golden robes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMkdFZnXqGUacDnD41iz3U3RrDeKj7t1ly99uu2DgLc4Lbgo3Rmm-GmkuCaHg2fruzlpR62UTubfFBg8F6P2LPoBysHwRyO6t9na2fC60jbY8WENQfu61v45E6UKGysBmAyJH2JZWGa3CcMZzsSRBWq7gnqgMragjGQ8fx71kEYzY9QJ2qDoM8VTtWTrE4t73Ldcokkhi-h9mk066JJMDedyvJGrTqQK8Jjo8Z9R5xCgMs-kmHmvR5BR1g47GaKLJSa3htgba5f0KF"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="relative z-10 pt-32 pb-16 px-8 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<header class="mb-16 text-center">
+<h1 class="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter text-primary drop-shadow-[0_0_25px_rgba(255,226,171,0.3)] mb-4">
+                Arcane Command
+            </h1>
+<p class="font-label text-stone-500 tracking-[0.2em] uppercase text-sm">Overseer of the Eternal Realms — Admin Dashboard</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Panel 1: Quest Resolution -->
+<section class="parchment-texture torn-edge p-8 shadow-2xl relative group overflow-hidden border border-stone-800/20">
+<div class="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full">
+<h2 class="font-headline text-3xl font-bold text-stone-900 mb-6 border-b border-stone-400/30 pb-2">Quest Resolution</h2>
+<div class="space-y-6 flex-grow">
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Team</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>The Sun-Walkers</option>
+<option>Shadow Vanguard</option>
+<option>Iron Pact</option>
+</select>
+</div>
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Quest</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>The Whispering Caves</option>
+<option>Tower of Silence</option>
+<option>Dragon's Rest</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-8">
+<button class="bg-emerald-800/90 hover:bg-emerald-700 text-white font-label font-bold py-4 px-2 rounded shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">emoji_events</span>
+                            Quest Won
+                        </button>
+<button class="bg-rose-900/90 hover:bg-rose-800 text-white font-label font-bold py-4 px-2 rounded shadow-[0_0_15px_rgba(225,29,72,0.2)] transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">skull</span>
+                            Quest Lost
+                        </button>
+</div>
+</div>
+</section>
+<!-- Panel 2: Dungeon Clearing -->
+<section class="parchment-texture torn-edge p-8 shadow-2xl relative group overflow-hidden border border-stone-800/20">
+<div class="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full">
+<h2 class="font-headline text-3xl font-bold text-stone-900 mb-6 border-b border-stone-400/30 pb-2">Dungeon Clearing</h2>
+<div class="space-y-6 flex-grow">
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Team</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>The Sun-Walkers</option>
+<option>Shadow Vanguard</option>
+</select>
+</div>
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Dungeon</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>Mithril Depths</option>
+<option>Spider's Weave</option>
+</select>
+</div>
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Player</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>Kaelen the Bold</option>
+<option>Lyra Windrider</option>
+<option>Thrum Hammerhand</option>
+</select>
+</div>
+</div>
+<button class="w-full mt-8 bg-primary-container hover:bg-amber-400 text-on-primary font-label font-extrabold py-5 px-4 rounded shadow-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">swords</span>
+                        Grant Clear &amp; Equipment
+                    </button>
+</div>
+</section>
+<!-- Panel 3: Dragon Fight -->
+<section class="parchment-texture torn-edge p-8 shadow-2xl relative group overflow-hidden border border-stone-800/20">
+<div class="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full">
+<h2 class="font-headline text-3xl font-bold text-stone-900 mb-6 border-b border-stone-400/30 pb-2">Dragon Fight</h2>
+<div class="space-y-6 flex-grow">
+<div>
+<label class="font-label text-xs font-bold text-stone-700 uppercase mb-2 block tracking-wider">Select Team</label>
+<select class="w-full bg-stone-200/50 border-stone-400/50 rounded-lg font-body text-stone-900 focus:ring-amber-600 focus:border-amber-600">
+<option>The Sun-Walkers</option>
+<option>Shadow Vanguard</option>
+<option>Iron Pact</option>
+</select>
+</div>
+<div class="mt-4 flex justify-center">
+<img alt="Dragon Icon" class="opacity-30 grayscale contrast-125" data-alt="Stylized dragon head silhouette in gold ink on parchment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACsTRYVzmGwJwgKJE-APmCWaSahGdMAPU9Vgyyn4lsm_ji_cIbvXXRgTjPfU9cWKJIaDXU4EBf1tkPdtFKmYR8IHJMiDM73Ol9rmOIbKvFRQWenl-WXcCdooT896RX22YB8hn1Jb1EtHpqV3ZGz3f6I-xMiLGf0aQmdqgiCWLEaXAH4oYp1QFKyg8bxrfogotTieX4YaIMMgfVCTpqfgfnvj2m2hjOh_v5eq0POSKzf9uMeyPH2JdQwDvThLAFWOJge-Mts118y60p"/>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-8">
+<button class="w-full bg-amber-200 hover:bg-amber-300 text-stone-900 font-label font-extrabold py-6 px-4 rounded shadow-[0_0_25px_rgba(255,226,171,0.5)] border-2 border-amber-500/50 transition-all hover:scale-[1.03] active:scale-95 flex flex-col items-center">
+<span class="text-xs tracking-widest mb-1 opacity-70">VALOROUS OUTCOME</span>
+<div class="flex items-center gap-3 text-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                Dragon Slain (Victory!)
+                            </div>
+</button>
+<button class="w-full bg-stone-900 hover:bg-black text-rose-100 font-label font-extrabold py-6 px-4 rounded shadow-[0_0_20px_rgba(166,27,16,0.4)] border-2 border-on-tertiary-container/50 transition-all hover:scale-[1.03] active:scale-95 flex flex-col items-center">
+<span class="text-xs tracking-widest mb-1 opacity-70">TRAGIC DEFEAT</span>
+<div class="flex items-center gap-3 text-lg">
+<span class="material-symbols-outlined">heart_broken</span>
+                                Party Defeated
+                            </div>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Decoration -->
+<footer class="mt-24 border-t border-amber-900/20 pt-8 flex flex-col md:flex-row justify-between items-center opacity-60 font-label">
+<div class="flex items-center gap-4 text-xs tracking-widest">
+<span>SYSTEM STABILITY: OPTIMAL</span>
+<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+</div>
+<div class="text-[10px] tracking-[0.3em] uppercase mt-4 md:mt-0">
+                Arcane Engine v9.4.1 — Forge of Worlds
+            </div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+<span class="material-symbols-outlined text-sm">auto_stories</span>
+<span class="material-symbols-outlined text-sm">balance</span>
+</div>
+</footer>
+</main>
+</body></html>

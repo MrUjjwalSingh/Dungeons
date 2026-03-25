@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dungeon Delve - The Cartographer's Table</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a12312",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211311",
+                        "parchment": "#EADABB",
+                        "ink": "#2A241F",
+                        "faded-ink": "#8D7C65"
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    boxShadow: {
+                        'paper': '0 12px 24px -6px rgba(0, 0, 0, 0.7)',
+                        'wax': '0 4px 6px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2)',
+                    },
+                    backgroundImage: {
+                        'wood-pattern': "url('https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')",
+                        'paper-texture': "url('https://www.transparenttextures.com/patterns/aged-paper.png')"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .filter-noise {
+            filter: contrast(1.1) sepia(0.3) opacity(0.9);
+        }
+        .rough-edge {
+            border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
+        }
+        .path-line {
+            stroke-dasharray: 8 8;
+            animation: dash 30s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -1000; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-ink overflow-x-hidden min-h-screen relative flex items-center justify-center">
+<!-- Wood Background -->
+<div class="absolute inset-0 bg-wood-pattern bg-cover bg-center opacity-40 mix-blend-multiply pointer-events-none" data-alt="Dark worn tavern table wood texture"></div>
+<!-- Main Navigation Artifact (Compass) -->
+<div class="absolute top-8 left-8 z-50">
+<button class="group flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#c69a53] to-[#8a6b32] rounded-full shadow-paper border-4 border-[#5c451e] transition-transform hover:scale-105 active:scale-95" title="Return to Tabletop">
+<span class="material-symbols-outlined text-[#2A241F] text-3xl group-hover:rotate-45 transition-transform duration-500">explore</span>
+</button>
+</div>
+<!-- The Parchment Canvas -->
+<main class="relative z-10 w-full max-w-5xl h-[85vh] mx-4 mt-8 bg-parchment bg-paper-texture shadow-paper rough-edge p-8 md:p-12 flex flex-col filter-noise" data-alt="Large aged parchment map">
+<!-- Header -->
+<header class="flex items-center justify-between border-b-2 border-faded-ink pb-6 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-5xl font-black text-ink tracking-tight drop-shadow-sm">The Sunken Keep</h1>
+<p class="text-xl text-faded-ink italic max-w-2xl leading-relaxed">A treacherous path through flooded corridors to claim the Sword Class. The damp walls echo with the groans of forgotten wardens.</p>
+</div>
+<!-- Ultimate Reward Stamp -->
+<div class="flex flex-col items-center justify-center p-4 border-2 border-primary/30 rounded-full w-32 h-32 rotate-[-5deg] relative">
+<div class="absolute inset-0 bg-primary/5 rounded-full"></div>
+<span class="material-symbols-outlined text-5xl text-primary drop-shadow-md">swords</span>
+<span class="text-sm font-bold uppercase tracking-widest text-primary mt-2">Class</span>
+</div>
+</header>
+<!-- Dungeon Map Area -->
+<div class="flex-1 relative border border-faded-ink/30 rounded-lg bg-[#e2d0af] bg-paper-texture overflow-hidden" data-alt="Detailed map of the dungeon trials">
+<!-- SVG Path connecting nodes -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 800 400">
+<path class="path-line" d="M 150 200 Q 250 100, 350 200 T 550 200 T 700 150" fill="none" stroke="#8D7C65" stroke-width="3"></path>
+</svg>
+<!-- Nodes -->
+<!-- Node 1: Completed -->
+<div class="absolute top-[45%] left-[15%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10">
+<div class="relative flex items-center justify-center w-16 h-16 bg-parchment border-2 border-ink rounded-full shadow-md transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-3xl text-ink">gate</span>
+<!-- Red X for completion -->
+<span class="absolute inset-0 flex items-center justify-center text-primary text-5xl font-black opacity-80 rotate-12 drop-shadow-sm pointer-events-none">X</span>
+</div>
+<p class="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-sm font-bold text-ink text-center w-32">The Iron Gate</p>
+</div>
+<!-- Node 2: Active -->
+<div class="absolute top-[45%] left-[40%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10">
+<div class="relative flex items-center justify-center w-20 h-20 bg-parchment border-4 border-primary rounded-full shadow-lg transition-transform group-hover:scale-105 animate-pulse">
+<span class="material-symbols-outlined text-4xl text-primary">water_drop</span>
+</div>
+<p class="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-base font-bold text-primary text-center w-32 drop-shadow-sm">Flooded Halls</p>
+</div>
+<!-- Node 3: Locked -->
+<div class="absolute top-[45%] left-[65%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10 opacity-60 grayscale">
+<div class="relative flex items-center justify-center w-16 h-16 bg-parchment border-2 border-faded-ink rounded-full shadow-md">
+<span class="material-symbols-outlined text-3xl text-faded-ink">skull</span>
+</div>
+<p class="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-sm font-bold text-faded-ink text-center w-32">Warden's Lair</p>
+</div>
+<!-- Reward Node -->
+<div class="absolute top-[35%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 z-10 opacity-50">
+<div class="flex items-center justify-center w-24 h-24 bg-parchment/50 border-2 border-dashed border-primary rounded-full">
+<span class="material-symbols-outlined text-5xl text-primary/50">swords</span>
+</div>
+</div>
+<!-- Trial Details Card (Overlapping) -->
+<div class="absolute bottom-6 right-6 w-80 bg-parchment shadow-paper rough-edge p-5 border border-faded-ink/50 rotate-2" data-alt="Small paper note with trial details">
+<div class="flex justify-between items-start mb-3 border-b border-faded-ink/30 pb-2">
+<h3 class="text-xl font-bold text-ink">Flooded Halls</h3>
+<span class="flex items-center text-primary font-bold bg-primary/10 px-2 py-1 rounded text-xs">
+<span class="material-symbols-outlined text-sm mr-1">warning</span> Risk: High
+                    </span>
+</div>
+<p class="text-sm text-ink mb-4 leading-relaxed">Wade through waist-deep murky water. Visibility is low, and the submerged dwellers are hungry. Agility is hindered.</p>
+<div class="bg-black/5 p-3 rounded mb-4">
+<p class="text-xs font-bold text-faded-ink uppercase tracking-wider mb-2">Required Wager</p>
+<div class="flex items-center justify-between">
+<span class="flex items-center font-bold text-ink"><span class="material-symbols-outlined mr-2 text-blue-800">directions_run</span> 15 Agility</span>
+<span class="flex items-center font-bold text-ink"><span class="material-symbols-outlined mr-2 text-red-800">favorite</span> 10 HP</span>
+</div>
+</div>
+<button class="w-full relative group h-12 flex items-center justify-center">
+<!-- Wax Seal Button Base -->
+<div class="absolute inset-0 bg-primary rounded shadow-wax transition-all group-hover:brightness-110 group-active:scale-[0.98] group-active:shadow-inner flex items-center justify-center">
+<span class="text-white font-bold tracking-widest uppercase text-sm drop-shadow-md flex items-center">
+<span class="material-symbols-outlined mr-2 text-lg">edit_document</span>
+                            Commit Trial
+                        </span>
+</div>
+</button>
+</div>
+</div>
+</main>
+</body></html>

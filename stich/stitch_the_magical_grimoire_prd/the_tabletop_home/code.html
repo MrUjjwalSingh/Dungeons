@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Cartographer's Table - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Caveat:wght@400..700&amp;family=IM+Fell+English+SC&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8B1E0F",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1E140C",
+                        "surface": "#EADABB",
+                        "text-ink": "#2A241F",
+                        "muted-ink": "#8D7C65",
+                        "accent-gold": "#C18F3A",
+                    },
+                    fontFamily: {
+                        "display": ["'IM Fell English'", "serif"],
+                        "body": ["'Alegreya'", "serif"],
+                        "handwriting": ["'Caveat'", "cursive"],
+                        "button": ["'IM Fell English SC'", "serif"]
+                    },
+                    boxShadow: {
+                        "floating": "0 12px 24px -6px rgba(0, 0, 0, 0.7)",
+                        "flat": "0 2px 4px rgba(0, 0, 0, 0.4)",
+                        "inner-carved": "inset 0 2px 4px rgba(0,0,0,0.8)"
+                    },
+                    backgroundImage: {
+                        "wood-texture": "url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop')",
+                        "paper-texture": "url('https://www.transparenttextures.com/patterns/aged-paper.png')"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom utilities for the tactile feel */
+        .paper-edges {
+            clip-path: polygon(
+                0% 2%, 2% 0%, 98% 1%, 100% 3%, 
+                99% 98%, 97% 100%, 3% 99%, 0% 97%
+            );
+        }
+        .ink-sketch {
+            filter: sepia(100%) hue-rotate(-50deg) saturate(200%) contrast(150%) brightness(50%);
+        }
+        .ink-sketch:hover {
+            filter: sepia(100%) hue-rotate(-50deg) saturate(300%) contrast(200%) brightness(40%);
+        }
+        
+        /* Map nodes positioning */
+        .node-1 { top: 20%; left: 25%; }
+        .node-2 { top: 15%; right: 20%; }
+        .node-3 { bottom: 25%; left: 30%; }
+        .node-4 { bottom: 20%; right: 25%; }
+        .node-5 { top: 45%; right: 10%; }
+        .node-boss { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1E140C; }
+        ::-webkit-scrollbar-thumb { background: #8B1E0F; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background-dark text-text-ink font-body antialiased min-h-screen overflow-hidden selection:bg-primary selection:text-surface">
+<!-- The Tabletop (Background) -->
+<div class="fixed inset-0 bg-wood-texture bg-cover bg-center opacity-80 mix-blend-multiply z-0" data-alt="Dark aged mahogany wood texture"></div>
+<div class="relative z-10 flex h-screen w-full flex-col p-4 md:p-8">
+<!-- Header / Navigation (Physical items representation) -->
+<header class="flex justify-between items-start w-full max-w-7xl mx-auto pointer-events-none">
+<!-- Title Card -->
+<div class="bg-surface bg-paper-texture p-4 shadow-flat paper-edges rotate-[-2deg] pointer-events-auto transition-transform hover:rotate-0">
+<h1 class="font-display text-3xl md:text-5xl text-primary font-bold tracking-wide">The Cartographer's Table</h1>
+<p class="font-handwriting text-xl text-muted-ink mt-1">Charting the realm's doom.</p>
+</div>
+<!-- Navigation Tools -->
+<nav class="flex gap-6 pointer-events-auto">
+<a class="group relative flex flex-col items-center justify-center w-24 h-24 transition-transform hover:-translate-y-2" href="#">
+<div class="w-16 h-16 rounded-full bg-accent-gold/20 border-4 border-accent-gold shadow-floating flex items-center justify-center backdrop-blur-sm" data-alt="Brass compass">
+<span class="material-symbols-outlined text-4xl text-accent-gold drop-shadow-md">explore</span>
+</div>
+<span class="font-handwriting text-surface opacity-0 group-hover:opacity-100 absolute -bottom-6 whitespace-nowrap text-xl transition-opacity">Tavern Post</span>
+</a>
+<a class="group relative flex flex-col items-center justify-center w-24 h-24 transition-transform hover:-translate-y-2" href="#">
+<div class="w-16 h-16 bg-muted-ink/30 border-2 border-text-ink shadow-floating flex items-center justify-center rotate-45" data-alt="Iron dagger">
+<span class="material-symbols-outlined text-4xl text-text-ink -rotate-45 drop-shadow-md">colorize</span>
+</div>
+<span class="font-handwriting text-surface opacity-0 group-hover:opacity-100 absolute -bottom-6 whitespace-nowrap text-xl transition-opacity">Quest Board</span>
+</a>
+<a class="group relative flex flex-col items-center justify-center w-24 h-24 transition-transform hover:-translate-y-2" href="#">
+<div class="w-20 h-16 bg-[#4A3728] rounded shadow-floating flex items-center justify-center border-t-8 border-[#3A2A1E]" data-alt="Leather satchel">
+<span class="material-symbols-outlined text-3xl text-accent-gold drop-shadow-md">menu_book</span>
+</div>
+<span class="font-handwriting text-surface opacity-0 group-hover:opacity-100 absolute -bottom-6 whitespace-nowrap text-xl transition-opacity">The Ledger</span>
+</a>
+</nav>
+</header>
+<!-- Main Map Area -->
+<main class="flex-1 w-full max-w-6xl mx-auto mt-8 relative flex items-center justify-center">
+<!-- Parchment Map -->
+<div class="relative w-[90%] md:w-[80%] aspect-[4/3] bg-surface bg-paper-texture shadow-floating paper-edges transition-all duration-700 ease-in-out">
+<!-- Decorative Map Elements -->
+<div class="absolute inset-4 border-2 border-muted-ink/30 rounded pointer-events-none"></div>
+<div class="absolute top-8 left-8 text-muted-ink/40 font-display text-4xl opacity-50 select-none">N</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" data-alt="Faded contour lines">
+<path d="M100 100 Q 200 50 300 150 T 500 200" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M150 300 Q 250 200 400 350 T 600 400" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+<!-- Dungeon Nodes -->
+<!-- Node 1 -->
+<button class="absolute node-1 group flex flex-col items-center transition-transform hover:scale-110 z-20">
+<div class="w-16 h-16 bg-contain bg-no-repeat bg-center ink-sketch" data-alt="Sketch of a Ruined Keep" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArYvF-JWAQgvtk4ASbSp6GNXtyKZZflUmVYPHyRx_sXiwyOSkNblagA00_faomMn4UEKjtFqG3B95j9oR7Ek-F21EhSlakOsfFSoqgtF52pJI5RURb_AB4f1KuqM4wV_lADLBOUiKyaSGf8HtD-hwBZdlsZriGlWGq3FOhCxPVKrkIrrMUZU8HJpcyZW_DNingqkQJMrXcu-xoysB_waHLL8WOQsZmbJy12_u1Rig4Ze2Yqw6jBdWq3C71vRkL0kDflUuiCMp_X_s');"></div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-2 bg-text-ink text-surface font-handwriting px-3 py-1 text-lg rounded shadow-flat whitespace-nowrap transition-opacity pointer-events-none">
+                        Ruined Keep <br/> <span class="text-sm text-accent-gold">Reward: Sword Class</span>
+</div>
+</button>
+<!-- Node 2 -->
+<button class="absolute node-2 group flex flex-col items-center transition-transform hover:scale-110 z-20">
+<div class="w-16 h-16 bg-contain bg-no-repeat bg-center ink-sketch relative" data-alt="Sketch of a Crystal Cave" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9sg1NZUcE3rFt5OiCuNOWcomYKknFtEkZwIhBzDIqIOZSIMq3FbtbdpaHqjtAf7s1oPeV1jtR9Rh-P2O0ekul9nIpvpb4UwEUZH8jn7snXAGdyZQiJ47Bt5WRL4_ZlpYy1yN56ZLn1s3PIzSHaUiL9gWJp_1Ys6EKqEW6uv7ALiYD233wVbYGRWXebemjSKwRpRxSIB7kQgJSEOuEckr3XIoz63xucP8oEGQT1Yuz3mLNwitkDZQ9dsSBhNcwXOmMKoH_FDHetqE');">
+<!-- Cleared State Indicator (X) -->
+<span class="absolute -inset-2 text-primary font-handwriting text-6xl font-bold flex items-center justify-center opacity-80 rotate-12 pointer-events-none">X</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-2 bg-text-ink text-surface font-handwriting px-3 py-1 text-lg rounded shadow-flat whitespace-nowrap transition-opacity pointer-events-none">
+                        Crystal Cave <span class="text-primary text-sm block">(Cleared)</span>
+</div>
+</button>
+<!-- Node 3 -->
+<button class="absolute node-3 group flex flex-col items-center transition-transform hover:scale-110 z-20">
+<div class="w-16 h-16 bg-contain bg-no-repeat bg-center ink-sketch relative" data-alt="Sketch of a Mage Tower" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD64jiYxT1VoPmqb6u2V8lbmsgiiVK9TSpO0nJTtceEsfP3iZ7mOpSXpijObL8hjoH3XNrCD67j6EzrKMN5so8nISjBUc_RTZ93KYWM4bQrgMpldTphANXmrlsW9utF92zCAyRze53s3yAkOEV_ecEulSJyrP_lxDQcWvZrJrGpad0BwocPU-ksSIMur7bk5RLtufuMrCCjzWzXffBGAOZ0UiLf638vkP1n2Jb8Qwn59mSVoK6RhE1Gi93Dzd3cZermel5obclX6dQ');">
+<!-- Cleared State Indicator (X) -->
+<span class="absolute -inset-2 text-primary font-handwriting text-6xl font-bold flex items-center justify-center opacity-80 -rotate-12 pointer-events-none">X</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-2 bg-text-ink text-surface font-handwriting px-3 py-1 text-lg rounded shadow-flat whitespace-nowrap transition-opacity pointer-events-none">
+                        Spire of Ages <span class="text-primary text-sm block">(Cleared)</span>
+</div>
+</button>
+<!-- Node 4 -->
+<button class="absolute node-4 group flex flex-col items-center transition-transform hover:scale-110 z-20">
+<div class="w-16 h-16 bg-contain bg-no-repeat bg-center ink-sketch relative" data-alt="Sketch of a Murky Swamp" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAjZT45zXYykvUyf67ZNaWxkI7oytwdIJ1xebPMsVNJ5Fy5ccWBM8TeIOT--CqduZx9mXXmbWmbLs3jzIkAnRUN46xs8OIffZ9Z07mtKzjo2RpVuB1F26cbmi9Bn5S8s84tYWSOn-Z7DW0DIlM3mel084nA2xrQ-y4VQ1gKoq9B_qLDp2ButpbU-_LMv7lbaWFZMReDyBue83mDYatmU9FVu0gNo_Bc6W9zJ5KYMhINR_5mC9MaVLNYezXUFMcfICUbDSIF62y6jO8');">
+<!-- Cleared State Indicator (X) -->
+<span class="absolute -inset-2 text-primary font-handwriting text-6xl font-bold flex items-center justify-center opacity-80 rotate-6 pointer-events-none">X</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-2 bg-text-ink text-surface font-handwriting px-3 py-1 text-lg rounded shadow-flat whitespace-nowrap transition-opacity pointer-events-none">
+                        Whispering Bogs <span class="text-primary text-sm block">(Cleared)</span>
+</div>
+</button>
+<!-- Node 5 -->
+<button class="absolute node-5 group flex flex-col items-center transition-transform hover:scale-110 z-20">
+<div class="w-16 h-16 bg-contain bg-no-repeat bg-center ink-sketch" data-alt="Sketch of a Dark Forest" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBn9qD6-_Yd06EcbVt7_kvVum9q7z8hYKKRHimbT-tijk5hg_YcCDGxWCm-OMqoGWmKyJfoYerUFH4B4Z3fMft7AzcxUtZgd1NVD9uyQhBcrZnNEKRNYMz7knIfDPwB5IS1mTShxeJ0zRFYGVRRjbKzYIQSXFzpOVK7MaOydIRfLF8rCBH81nnXX3Qy7ROZqC9GQlsrpjUovxpihCnlfq8f77_mJGaVY7uElbta5rVaw9N9XXyHmpnZclgorTds9FKdBwwchGegXJc');"></div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-2 bg-text-ink text-surface font-handwriting px-3 py-1 text-lg rounded shadow-flat whitespace-nowrap transition-opacity pointer-events-none">
+                        Elderwood <br/> <span class="text-sm text-accent-gold">Reward: Spear Class</span>
+</div>
+</button>
+<!-- Dragon Boss (Center) -->
+<!-- State: Ignited (3 dungeons cleared) -->
+<button class="absolute node-boss group flex flex-col items-center z-30 transition-transform hover:scale-105 cursor-pointer">
+<!-- Burning Ink Lines leading to it -->
+<svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none -z-10 opacity-60" data-alt="Burning trail to boss">
+<path d="M50 50 L150 150 M250 50 L150 150 M50 250 L150 150" fill="none" stroke="#8B1E0F" stroke-dasharray="5,5" stroke-width="2"></path>
+</svg>
+<div class="relative w-24 h-24">
+<!-- Base Skull Icon -->
+<div class="absolute inset-0 bg-contain bg-no-repeat bg-center" data-alt="Glowing red skull icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmia0Z_oU1c4R5NxmPTCQi5Mo1y3MRTWz4OyNFJFqw0QmKrBT0fEk56jaxgvGgB1ZgLIfjECvbeXhr3JkpEXR3SUyz2P4jWmeTJYElxEIfRfex2rb5k6SiXHQhmMB7FpnPe9uacORojWf4GocIqCbD4QVmc_s2HwiBrrg9Fyr_u2wIlK_D82PiA2-4fcaACYCaibiJYH7kmGSFgbwEKzRalDgosDzwjsPhy3aNU0lcW_7mObGzhs01yGlU88Bz3UA0r6nS1sZHmys'); filter: drop-shadow(0 0 8px rgba(139, 30, 15, 0.8));"></div>
+<!-- Ember Particles (Simulated with CSS) -->
+<div class="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-accent-gold animate-ping opacity-75"></div>
+<div class="absolute bottom-0 -left-2 w-2 h-2 rounded-full bg-primary animate-ping opacity-50" style="animation-delay: 0.5s;"></div>
+</div>
+<div class="opacity-0 group-hover:opacity-100 absolute top-full mt-4 bg-primary text-surface font-display px-4 py-2 text-xl rounded shadow-floating border border-accent-gold whitespace-nowrap transition-opacity pointer-events-none">
+                        The Ancient Dragon <br/> <span class="font-body text-sm text-surface/80">3/3 Prerequisites Met. Click to Engage.</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom UI / Status -->
+<footer class="w-full flex justify-between items-end p-4 pointer-events-none max-w-7xl mx-auto">
+<div class="bg-[#1E140C]/80 p-3 rounded border border-muted-ink/20 backdrop-blur-sm pointer-events-auto flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+<div>
+<p class="font-display text-surface text-lg leading-tight">Current Party State</p>
+<p class="font-body text-muted-ink text-sm">3 Locations Conquered</p>
+</div>
+</div>
+<div class="bg-surface bg-paper-texture p-2 shadow-flat paper-edges rotate-[3deg] pointer-events-auto max-w-[200px]">
+<p class="font-handwriting text-text-ink text-lg leading-tight text-center">"The flames awaken... gather your strength."</p>
+</div>
+</footer>
+</div>
+</body></html>

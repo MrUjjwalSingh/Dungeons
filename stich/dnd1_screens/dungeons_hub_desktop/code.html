@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Relic &amp; Rune | Dungeons Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Space+Grotesk:wght@300;500;700&amp;family=Work+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#795900",
+              "tertiary-container": "#ffb8ad",
+              "background": "#131313",
+              "primary-fixed-dim": "#fbbc00",
+              "on-secondary-fixed-variant": "#3c4859",
+              "inverse-surface": "#e5e2e1",
+              "on-primary-fixed": "#261a00",
+              "tertiary": "#ffded9",
+              "surface-container-low": "#1c1b1b",
+              "tertiary-fixed": "#ffdad4",
+              "surface-container-highest": "#353534",
+              "on-tertiary-fixed": "#410000",
+              "surface-container": "#201f1f",
+              "on-primary-fixed-variant": "#5c4300",
+              "primary-container": "#ffbf00",
+              "on-secondary-container": "#adb9ce",
+              "on-primary": "#402d00",
+              "on-tertiary": "#690000",
+              "surface-container-high": "#2a2a2a",
+              "error-container": "#93000a",
+              "on-secondary": "#253141",
+              "secondary-container": "#3e4a5b",
+              "error": "#ffb4ab",
+              "on-tertiary-container": "#a61b10",
+              "tertiary-fixed-dim": "#ffb4a8",
+              "outline": "#9c8f78",
+              "outline-variant": "#504532",
+              "secondary": "#bbc7dc",
+              "primary": "#ffe2ab",
+              "surface": "#131313",
+              "on-tertiary-fixed-variant": "#920703",
+              "on-secondary-fixed": "#101c2c",
+              "surface-bright": "#393939",
+              "secondary-fixed-dim": "#bbc7dc",
+              "on-surface-variant": "#d4c5ab",
+              "surface-variant": "#353534",
+              "surface-dim": "#131313",
+              "on-primary-container": "#6d5000",
+              "on-surface": "#e5e2e1",
+              "on-error": "#690005",
+              "primary-fixed": "#ffdfa0",
+              "inverse-on-surface": "#313030",
+              "surface-container-lowest": "#0e0e0e",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e5e2e1",
+              "surface-tint": "#fbbc00",
+              "secondary-fixed": "#d7e3f9"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Work Sans"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.parchment-mask {
+    mask-image: linear-gradient(to bottom, black 95%, transparent 100%), radial-gradient(circle at 0 0, black 98%, transparent 100%);
+    clip-path: polygon(2% 0%, 98% 1%, 100% 4%, 99% 96%, 97% 100%, 3% 99%, 0% 97%, 1% 3%)
+    }
+.stone-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDkexGJ7DKt2QdGM8pQN3AaVPChAK79-nYcXKeKcyl3HeWAyS6y9BORNoikLLekOVMQILkfW1aF4p8fnYdaLdc5zQA8uJVesc8QJ3C0NYDrQqE7a0wS8XjjSq4RHfslZVtblGOqd-4SZbkD08TjSPXnaMhUT4CP7Oi1Z4jmTBUcqw4Y3fEZIiVjbUfekhnKBd_brZWTx41Yeufrb_Wj8AsOk6eVD9d2yRM9sGpsFbmyOZATO0q_-SYskg3x2x0ug5Nc96476Uo-4oOc)
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<!-- TopNavBar Implementation -->
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-[1920px] mx-auto sticky top-0 z-50 bg-[#131313] dark:bg-[#131313] backdrop-blur-md bg-opacity-90 shadow-[0_10px_30px_-15px_rgba(255,191,0,0.1)]">
+<div class="flex items-center gap-8">
+<span class="font-notoSerif text-2xl font-black text-[#ffe2ab] drop-shadow-[0_0_8px_rgba(255,226,171,0.5)]">Relic &amp; Rune</span>
+<div class="hidden md:flex gap-6">
+<a class="font-notoSerif tracking-tight font-bold text-lg text-[#bbc7dc] hover:text-[#ffe2ab] transition-colors duration-300" href="#">Home</a>
+<a class="font-notoSerif tracking-tight font-bold text-lg text-[#ffe2ab] border-b-2 border-[#ffbf00] pb-1 shadow-[0_4px_12px_-2px_rgba(255,191,0,0.3)]" href="#">Quests</a>
+<a class="font-notoSerif tracking-tight font-bold text-lg text-[#bbc7dc] hover:text-[#ffe2ab] transition-colors duration-300" href="#">Ledger</a>
+<a class="font-notoSerif tracking-tight font-bold text-lg text-[#bbc7dc] hover:text-[#ffe2ab] transition-colors duration-300" href="#">Tavern</a>
+<a class="font-notoSerif tracking-tight font-bold text-lg text-[#bbc7dc] hover:text-[#ffe2ab] transition-colors duration-300" href="#">Admin</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-highest border-none rounded-lg py-2 pl-4 pr-10 text-sm focus:ring-1 focus:ring-primary w-64 text-on-surface" placeholder="Search Grimoire..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2 text-outline" data-icon="search">search</span>
+</div>
+<button class="p-2 text-[#bbc7dc] hover:text-[#ffe2ab] transition-all"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-[#bbc7dc] hover:text-[#ffe2ab] transition-all"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+<div class="bg-gradient-to-r from-transparent via-[#504532]/20 to-transparent h-[2px] w-full absolute bottom-0"></div>
+</nav>
+<div class="flex">
+<!-- SideNavBar Implementation -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-76px)] w-64 py-6 sticky top-[76px] bg-[#1c1b1b] dark:bg-[#1c1b1b] shadow-[4px_0_24px_rgba(0,0,0,0.5)] border-r border-[#504532]/10 z-40">
+<div class="px-6 mb-8">
+<h2 class="font-notoSerif font-bold text-[#ffe2ab] text-xl">The Grimoire</h2>
+<p class="font-label text-xs text-secondary opacity-60">Unregistered Traveler</p>
+<button class="mt-4 w-full py-2 bg-primary-container text-on-primary-container font-label text-sm font-bold rounded-lg shadow-lg hover:brightness-110 transition-all">Register Soul</button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-[#bbc7dc] py-3 px-6 flex items-center gap-3 opacity-80 hover:bg-[#ffbf00]/5 hover:opacity-100 transition-all font-notoSerif text-base tracking-wide" href="#">
+<span class="material-symbols-outlined text-[#ffbf00]" data-icon="fort">fort</span> Home
+                </a>
+<a class="bg-[#ffbf00]/10 text-[#ffbf00] border-l-4 border-[#ffbf00] py-3 px-6 flex items-center gap-3 font-notoSerif text-base tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span> Quests
+                </a>
+<a class="text-[#bbc7dc] py-3 px-6 flex items-center gap-3 opacity-80 hover:bg-[#ffbf00]/5 hover:opacity-100 transition-all font-notoSerif text-base tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span> Ledger
+                </a>
+<a class="text-[#bbc7dc] py-3 px-6 flex items-center gap-3 opacity-80 hover:bg-[#ffbf00]/5 hover:opacity-100 transition-all font-notoSerif text-base tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="sports_bar">sports_bar</span> Tavern
+                </a>
+<a class="text-[#bbc7dc] py-3 px-6 flex items-center gap-3 opacity-80 hover:bg-[#ffbf00]/5 hover:opacity-100 transition-all font-notoSerif text-base tracking-wide" href="#">
+<span class="material-symbols-outlined" data-icon="shield_person">shield_person</span> Admin
+                </a>
+</nav>
+<div class="mt-auto px-6 space-y-4 pt-6 border-t border-[#504532]/20">
+<a class="text-[#bbc7dc] text-sm flex items-center gap-3 hover:text-[#ffe2ab] transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span> Settings
+                </a>
+<a class="text-[#bbc7dc] text-sm flex items-center gap-3 hover:text-[#ffe2ab] transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help_center">help_center</span> Support
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-8 bg-surface overflow-x-hidden">
+<header class="mb-12">
+<h1 class="font-headline text-5xl font-black text-primary mb-2 tracking-tight">The Dungeon Hub</h1>
+<p class="font-body text-secondary max-w-2xl text-lg opacity-80">Navigate the treacherous lands of Relic &amp; Rune. Conquer the depths, claim the artifacts, and prepare for the ultimate confrontation.</p>
+</header>
+<!-- Bento Grid of Dungeons -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+<!-- Dungeon Card 1: Crystal Caverns -->
+<article class="parchment-mask bg-surface-container-low p-6 flex flex-col min-h-[400px] border border-outline-variant/10 relative group hover:shadow-[0_0_40px_rgba(255,226,171,0.1)] transition-all">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-secondary-container text-secondary text-[10px] font-label px-2 py-1 uppercase tracking-widest rounded-full">Common Tier</span>
+</div>
+<div class="mb-6 h-48 w-full rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="Glowing blue crystals in a dark cavern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0952cMMyecAzPiIJmzRZDGm3p2CMDfCBTLGYFOg75dUws-knIbISSGt19ftwZRUHi2_Lk29-oj3wezsMh5m9_CQBHSILFygWEr7Bbze_Zdkxrbbm-xLczaUFhPpaoWu1eRSFTdoEjz8ZW3SX96ZodPTm1SiVOiM6c86DsQTbHPBKXnqoNtXMikEoCx9-jASz3c9BTvBS4V0NslLI2Q6UTT1yNT-UuNAyUiuBeMMlxsu8wTdB47Zlh8TcvRobNdrT7LfLiMEaSAgL4"/>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-2">Crystal Caverns</h3>
+<p class="font-body text-sm text-on-surface-variant mb-auto leading-relaxed">Faint luminescent fungi light the path through razor-sharp quartz formations. Beware the Echo Wraiths.</p>
+<div class="mt-6 flex flex-wrap gap-4 items-end">
+<div class="flex-1">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Required Stat</span>
+<div class="flex items-center gap-2 text-secondary font-label font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+                                30 Agility
+                            </div>
+</div>
+<div class="text-right">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Reward</span>
+<div class="font-body text-primary-fixed-dim text-sm italic">Prismatic Shard</div>
+</div>
+</div>
+</article>
+<!-- Dungeon Card 2: Sunken Ruins -->
+<article class="parchment-mask bg-surface-container-low p-6 flex flex-col min-h-[400px] border border-outline-variant/10 relative group hover:shadow-[0_0_40px_rgba(187,199,220,0.1)] transition-all lg:col-span-1">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] font-label px-2 py-1 uppercase tracking-widest rounded-full">Rare Tier</span>
+</div>
+<div class="mb-6 h-48 w-full rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="Underwater stone temple ruins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtrxQpk6c1lbAmUI_tywzzhGMe6qBRmAcNpbAaXLrXbL-J05ATXVhEbWOmgpHuClC4sRiI6V8jZiABmwqH11tMZZPTS1xHFlDnWxrpyB8GpbzuQeGHtJznwrgrkmJb8FbE_cq-7D49dJlJqt5L7io2O6aycXSAxQWm1Vh7gy37dDjBnGzTT82t6NC53w3XlAefVS_FNPpGyqsxCezHuGgPwGoWMp8hyzxj7fdiOnPSRJYe4mApFmDJx4Aep2k6_j-BILRUA2ImJsdD"/>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-2">Sunken Ruins</h3>
+<p class="font-body text-sm text-on-surface-variant mb-auto leading-relaxed">Submerged for eons, this temple of the Old Sea God hides treasures guarded by drowned leviathans.</p>
+<div class="mt-6 flex flex-wrap gap-4 items-end">
+<div class="flex-1">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Required Stat</span>
+<div class="flex items-center gap-2 text-secondary font-label font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="waves">waves</span>
+                                45 Endurance
+                            </div>
+</div>
+<div class="text-right">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Reward</span>
+<div class="font-body text-primary-fixed-dim text-sm italic">Trident of Tide</div>
+</div>
+</div>
+</article>
+<!-- Dungeon Card 3: Scorched Spire -->
+<article class="parchment-mask bg-surface-container-low p-6 flex flex-col min-h-[400px] border border-outline-variant/10 relative group hover:shadow-[0_0_40px_rgba(166,27,16,0.1)] transition-all">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary-container text-on-primary-container text-[10px] font-label px-2 py-1 uppercase tracking-widest rounded-full">Elite Tier</span>
+</div>
+<div class="mb-6 h-48 w-full rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="Tall volcanic tower surrounded by lava" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDntN_qwCZcfYF4Hz9j-UaUe-qtivq1wQXL-DejTFQOz3l62hWtWtfVi9_jTIpz3YiYX63jlsgzIqT2oNJZNG--lsgOhrZD1k1TakaTM3M8dj_621fVoCJAOcBwcoo-qzdXZ0CGYbtUHy7jb8FDD_0DJwFfouYOWgcKZwZ5Po6jUTeSNN3Dx1azBUJKhCiWssGKTDi91stTpexzi52wtq9qP_tF7tzYsgC4zCpMftdxbthYA3hlylqf64Q-losNxMTVSyMfDfg6dg3"/>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-2">Scorched Spire</h3>
+<p class="font-body text-sm text-on-surface-variant mb-auto leading-relaxed">A tower reaching toward the heavens, wreathed in eternal flame and the screams of fallen heroes.</p>
+<div class="mt-6 flex flex-wrap gap-4 items-end">
+<div class="flex-1">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Required Stat</span>
+<div class="flex items-center gap-2 text-secondary font-label font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="local_fire_department">local_fire_department</span>
+                                60 Strength
+                            </div>
+</div>
+<div class="text-right">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Reward</span>
+<div class="font-body text-primary-fixed-dim text-sm italic">Cinder Blade</div>
+</div>
+</div>
+</article>
+<!-- Dungeon Card 4: Whispering Woods -->
+<article class="parchment-mask bg-surface-container-low p-6 flex flex-col min-h-[400px] border border-outline-variant/10 relative group hover:shadow-[0_0_40px_rgba(255,226,171,0.1)] transition-all">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-secondary-container text-secondary text-[10px] font-label px-2 py-1 uppercase tracking-widest rounded-full">Common Tier</span>
+</div>
+<div class="mb-6 h-48 w-full rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="Dense misty forest with glowing eyes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0N57mrEe2pWNRq7pV4qljWYV0Q5SRVS2clyrA_lZBND66WECR7miAG49OshLv-k5ZwBZOdy9r4Hvu-WOu7P84PfJZw3ZJUkqs5LTHge1ByDj0oK_Yk7lFrEZ-JyOJiF-UH8yV1XGL4WRdIi6GQPXG2xwElbGR0_5bL_jCuaFG-rAAzgRk0xprpkq3V7ZKGYROncfv734Cm01mlHXCTa4USrJRZB5CFA9J4-Rkyw5kXNB34CGAnJNuctQ0_uzKoXSQJTvgIE_Y8UED"/>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-2">Whispering Woods</h3>
+<p class="font-body text-sm text-on-surface-variant mb-auto leading-relaxed">The trees themselves watch your every move. Do not listen to the voices calling from the shadows.</p>
+<div class="mt-6 flex flex-wrap gap-4 items-end">
+<div class="flex-1">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Required Stat</span>
+<div class="flex items-center gap-2 text-secondary font-label font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="psychology">psychology</span>
+                                25 Wisdom
+                            </div>
+</div>
+<div class="text-right">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Reward</span>
+<div class="font-body text-primary-fixed-dim text-sm italic">Elder Staff</div>
+</div>
+</div>
+</article>
+<!-- Dungeon Card 5: Frozen Hollow -->
+<article class="parchment-mask bg-surface-container-low p-6 flex flex-col min-h-[400px] border border-outline-variant/10 relative group hover:shadow-[0_0_40px_rgba(255,226,171,0.1)] transition-all lg:col-span-2">
+<div class="flex flex-col lg:flex-row gap-6 h-full">
+<div class="lg:w-1/2 h-full min-h-[200px] rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover" data-alt="Deep ice cave with blue glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBT-PSyv70b9uuWZ02lbqDLfTLdhAzv_biYEx_zFTDVCzLqJj_OJ9heRoABJhH35PqHSGf4kZd7SdC4qvAke7gXvKWvglrzsVnA7jKppHOjLRvxWFP39zu-_w0JxD-ohgh7TbRnKrPUrmX6UP9H1tU90yWdF53PfP4VEZct5lAjuKjqiarAMQm-yzptn0lAGy6mTkBvoJXc45mboqZL0gP4H0QfwS31-i_Y50BKFfMV1mHsMBjaMQsuMcCvhJz3wtW1V77QpWT1HWv"/>
+</div>
+<div class="lg:w-1/2 flex flex-col py-2">
+<div class="mb-2">
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] font-label px-2 py-1 uppercase tracking-widest rounded-full">Rare Tier</span>
+</div>
+<h3 class="font-headline text-2xl text-primary mb-2">Frozen Hollow</h3>
+<p class="font-body text-sm text-on-surface-variant mb-auto leading-relaxed">Where time itself stands still in the ice. An ancient warrior king waits for a challenger worthy of his frost-bitten crown.</p>
+<div class="mt-6 flex flex-wrap gap-4 items-end">
+<div class="flex-1">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Required Stat</span>
+<div class="flex items-center gap-2 text-secondary font-label font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="ac_unit">ac_unit</span>
+                                        50 Focus
+                                    </div>
+</div>
+<div class="text-right">
+<span class="font-label text-[10px] uppercase text-outline block mb-1">Reward</span>
+<div class="font-body text-primary-fixed-dim text-sm italic">Ice Queen's Heart</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Final Boss Section -->
+<section class="mt-16 relative overflow-hidden bg-[#0a0a0a] rounded-xl p-1 shadow-[0_0_60px_rgba(166,27,16,0.25)] border border-[#4a0404]">
+<div class="absolute inset-0 bg-gradient-to-br from-[#1a0505] via-[#050505] to-black opacity-90"></div>
+<div class="relative p-8 lg:p-12 flex flex-col lg:flex-row items-center gap-12">
+<div class="w-full lg:w-1/3 flex flex-col items-center text-center">
+<div class="w-48 h-48 rounded-full border-4 border-dashed border-[#8b0000]/40 flex items-center justify-center mb-6 relative bg-[#121212]/50 shadow-[inset_0_0_20px_rgba(139,0,0,0.2)]">
+<span class="material-symbols-outlined text-8xl text-[#4a0404] opacity-60" data-icon="dragon_beast">castle</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-[#ff4500] drop-shadow-[0_0_15px_rgba(255,69,0,0.5)]" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-[#4a0404]/30 border border-[#8b0000]/40 rounded-full">
+<span class="w-2 h-2 rounded-full bg-[#ff4500] animate-pulse"></span>
+<span class="text-[#ff4500] font-label text-xs uppercase tracking-tighter">Status: Lethal Presence</span>
+</div>
+</div>
+<div class="flex-1">
+<span class="text-[#ff4500] font-label text-xs uppercase tracking-tighter">Level 100 World Boss</span>
+<h2 class="font-headline text-5xl font-black text-on-surface mb-4">Final Boss: The Dragon</h2>
+<p class="font-body text-on-surface-variant text-lg mb-8 leading-relaxed max-w-xl">The Scourge of Aethelgard. His breath consumes kingdoms, and his scales are harder than any mortal steel. Only those wielding the three artifacts of the Ancients may challenge his reign.</p>
+<div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+<button class="px-8 py-4 bg-surface-container-highest text-outline font-headline font-bold text-xl rounded-lg border border-outline-variant/30 flex items-center gap-3 cursor-not-allowed opacity-70" disabled="">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                                Challenge Boss
+                            </button>
+<div class="flex flex-col">
+<span class="font-label text-xs text-[#ff4500]/70 font-bold">LOCK REQUIREMENT</span>
+<span class="font-body text-on-surface-variant italic">Requires 3 pieces of equipment to unlock</span>
+</div>
+</div>
+</div>
+<!-- Ambient Embers Decoration -->
+<div class="absolute right-0 top-0 w-64 h-full pointer-events-none overflow-hidden opacity-30"><div class="absolute top-10 right-10 w-2 h-2 bg-[#ff4500] rounded-full blur-[1px] animate-pulse"></div><div class="absolute top-32 right-20 w-1 h-1 bg-[#ff2200] rounded-full blur-[1px] animate-pulse delay-75"></div><div class="absolute bottom-20 right-40 w-1.5 h-1.5 bg-[#ff4500] rounded-full blur-[1.5px] animate-pulse delay-150"></div><div class="absolute top-1/2 right-12 w-2 h-2 bg-[#ff0000] rounded-full blur-[2px] animate-pulse delay-300"></div></div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

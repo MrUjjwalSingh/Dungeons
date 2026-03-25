@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Relic &amp; Rune - Quest Bounty Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Space+Grotesk:wght@300;500;700&amp;family=Work+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#d7e3f9",
+              "primary": "#ffe2ab",
+              "on-secondary-fixed": "#101c2c",
+              "surface-variant": "#353534",
+              "inverse-on-surface": "#313030",
+              "surface-tint": "#fbbc00",
+              "on-background": "#e5e2e1",
+              "surface-bright": "#393939",
+              "outline": "#9c8f78",
+              "secondary-fixed-dim": "#bbc7dc",
+              "secondary": "#bbc7dc",
+              "inverse-surface": "#e5e2e1",
+              "on-primary-container": "#6d5000",
+              "on-surface-variant": "#d4c5ab",
+              "on-surface": "#e5e2e1",
+              "on-primary-fixed": "#261a00",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "primary-container": "#ffbf00",
+              "on-primary-fixed-variant": "#5c4300",
+              "surface-container-highest": "#353534",
+              "on-tertiary-container": "#a61b10",
+              "outline-variant": "#504532",
+              "tertiary-fixed": "#ffdad4",
+              "primary-fixed": "#ffdfa0",
+              "surface-dim": "#131313",
+              "on-secondary-container": "#adb9ce",
+              "background": "#131313",
+              "surface-container-low": "#1c1b1b",
+              "on-tertiary-fixed": "#410000",
+              "surface-container-lowest": "#0e0e0e",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#3c4859",
+              "tertiary-fixed-dim": "#ffb4a8",
+              "secondary-container": "#3e4a5b",
+              "error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#920703",
+              "on-tertiary": "#690000",
+              "tertiary-container": "#ffb8ad",
+              "tertiary": "#ffded9",
+              "surface-container": "#201f1f",
+              "surface-container-high": "#2a2a2a",
+              "surface": "#131313",
+              "primary-fixed-dim": "#fbbc00",
+              "on-secondary": "#253141",
+              "inverse-primary": "#795900",
+              "on-primary": "#402d00"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Work Sans"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .torn-edge {
+            clip-path: polygon(0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 0%, 30% 2%, 35% 1%, 40% 3%, 45% 0%, 50% 2%, 55% 1%, 60% 4%, 65% 0%, 70% 2%, 75% 1%, 80% 3%, 85% 0%, 90% 2%, 95% 1%, 100% 3%, 100% 97%, 95% 99%, 90% 96%, 85% 100%, 80% 97%, 75% 99%, 70% 96%, 65% 100%, 60% 97%, 55% 99%, 50% 96%, 45% 100%, 40% 97%, 35% 99%, 30% 96%, 25% 100%, 20% 97%, 15% 99%, 10% 96%, 5% 100%, 0% 97%);
+        }
+        .wood-texture {
+            background-color: #1c1b1b;
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(80, 69, 50, 0.05) 40px, rgba(80, 69, 50, 0.05) 80px),
+                              linear-gradient(to right, rgba(0,0,0,0.3), transparent, rgba(0,0,0,0.3));
+        }
+        .tavern-smoke {
+            background: radial-gradient(circle at 50% -20%, rgba(255, 191, 0, 0.08), transparent 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary min-h-screen overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 border-b border-[#504532]/20 bg-gradient-to-b from-[#1c1b1b] to-[#131313] shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#ffe2ab]" style="font-variation-settings: 'FILL' 1;">fort</span>
+<h1 class="text-xl font-headline font-bold text-[#ffe2ab] drop-shadow-[0_0_8px_rgba(255,191,0,0.4)] tracking-tight">Relic &amp; Rune</h1>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label uppercase px-4 py-1.5 text-xs font-bold tracking-widest rounded shadow-[0_0_10px_rgba(255,191,0,0.3)] active:scale-95 transition-transform">
+            Register Team
+        </button>
+</header>
+<main class="pt-16 pb-24 tavern-smoke min-h-screen">
+<!-- Current Team Status Banner -->
+<section class="px-4 py-6">
+<div class="bg-surface-container-high border-l-4 border-primary p-4 rounded-r shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-6xl">groups</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Current Team Status</span>
+<div class="flex items-center gap-4 mt-1">
+<div class="flex flex-col">
+<span class="text-xs font-label text-secondary uppercase">Active Members</span>
+<span class="text-lg font-headline font-bold text-primary">4/5 Heroes</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex flex-col">
+<span class="text-xs font-label text-secondary uppercase">Team Morale</span>
+<span class="text-lg font-headline font-bold text-primary">High</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content: Bounty Board -->
+<div class="px-4 pb-8">
+<div class="flex items-center justify-between mb-6 px-2">
+<h2 class="font-headline text-3xl font-bold text-primary drop-shadow-sm">Bounty Board</h2>
+<span class="material-symbols-outlined text-outline">filter_list</span>
+</div>
+<!-- The Board Surface -->
+<div class="wood-texture rounded-xl p-6 shadow-inner border border-outline-variant/10 flex flex-col gap-8 min-h-[600px] relative">
+<!-- Card 1 -->
+<article class="torn-edge bg-[#d4c5ab] text-[#313030] p-6 shadow-xl transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative group">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2">
+<span class="material-symbols-outlined text-[#504532] text-2xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold uppercase tracking-tight text-[#1c1b1b]">Mushroom Gathering</h3>
+<span class="font-label text-[10px] font-bold bg-[#1c1b1b]/10 px-2 py-0.5 rounded">ID: 0842</span>
+</div>
+<p class="font-body text-sm leading-relaxed mb-4 opacity-90 italic">
+                        Gather rare 'Glow-Cap' mushrooms from the Sunken Vale. Watch for the spores, they cause heavy hallucinations.
+                    </p>
+<div class="flex justify-between items-center border-t border-[#1c1b1b]/20 pt-4 mt-auto">
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase font-bold text-[#a61b10]">Risk</span>
+<span class="font-headline font-bold text-[#a61b10]">15 HP</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label text-[10px] uppercase font-bold text-[#1b5e20]">Reward</span>
+<span class="font-headline font-bold text-[#1b5e20]">30 Mana</span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="torn-edge bg-[#e5e2e1] text-[#313030] p-6 shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-300 relative">
+<div class="absolute -top-3 left-1/3">
+<span class="material-symbols-outlined text-[#504532] text-2xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold uppercase tracking-tight text-[#1c1b1b]">Rat Infestation</h3>
+<span class="font-label text-[10px] font-bold bg-[#1c1b1b]/10 px-2 py-0.5 rounded">ID: 0911</span>
+</div>
+<p class="font-body text-sm leading-relaxed mb-4 opacity-90 italic">
+                        The tavern cellar is overrun with rodents of unusual size. Clear them out before they drink the remaining mead.
+                    </p>
+<div class="flex justify-between items-center border-t border-[#1c1b1b]/20 pt-4 mt-auto">
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase font-bold text-[#a61b10]">Risk</span>
+<span class="font-headline font-bold text-[#a61b10]">22 HP</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label text-[10px] uppercase font-bold text-[#1b5e20]">Reward</span>
+<span class="font-headline font-bold text-[#1b5e20]">15 Mana</span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="torn-edge bg-[#d4c5ab] text-[#313030] p-6 shadow-xl transform -rotate-2 hover:rotate-0 transition-transform duration-300 relative">
+<div class="absolute -top-3 right-1/4">
+<span class="material-symbols-outlined text-[#504532] text-2xl" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold uppercase tracking-tight text-[#1c1b1b]">Lost Scabbard</h3>
+<span class="font-label text-[10px] font-bold bg-[#1c1b1b]/10 px-2 py-0.5 rounded">ID: 0722</span>
+</div>
+<p class="font-body text-sm leading-relaxed mb-4 opacity-90 italic">
+                        A knight has lost his ceremonial scabbard near the Whispering Woods. Find it and return it to the local chapel.
+                    </p>
+<div class="flex justify-between items-center border-t border-[#1c1b1b]/20 pt-4 mt-auto">
+<div class="flex flex-col">
+<span class="font-label text-[10px] uppercase font-bold text-[#a61b10]">Risk</span>
+<span class="font-headline font-bold text-[#a61b10]">5 HP</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label text-[10px] uppercase font-bold text-[#1b5e20]">Reward</span>
+<span class="font-headline font-bold text-[#1b5e20]">50 Mana</span>
+</div>
+</div>
+</article>
+<!-- Empty State Message -->
+<div class="mt-12 mb-8 flex flex-col items-center justify-center opacity-40">
+<div class="w-full h-[1px] bg-gradient-to-r from-transparent via-outline-variant to-transparent mb-6"></div>
+<span class="font-label text-xs tracking-[0.4em] uppercase font-bold text-center leading-loose">
+                        NO MORE QUESTS AVAILABLE
+                    </span>
+<p class="font-body text-[10px] text-center mt-2 max-w-[200px]">Check back after the local tavern keeper wakes from his stupor.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#1c1b1b]/95 backdrop-blur-md rounded-t-xl border-t border-[#504532]/30 shadow-[0_-8px_32px_rgba(0,0,0,0.8)]">
+<a class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl">shield</span>
+<span class="font-label text-[10px] font-bold tracking-widest mt-1 uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#ffe2ab] bg-[#ffbf00]/20 rounded-xl py-1 px-3 shadow-[0_0_15px_rgba(255,191,0,0.2)] animate-pulse duration-500" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label text-[10px] font-bold tracking-widest mt-1 uppercase">Quests</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+<span class="font-label text-[10px] font-bold tracking-widest mt-1 uppercase">Ledger</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#bbc7dc] opacity-60 hover:text-[#ffe2ab] hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl">sports_bar</span>
+<span class="font-label text-[10px] font-bold tracking-widest mt-1 uppercase">Tavern</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Tavern Post</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a12312",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211311",
+                        "wood-base": "#1e140c",
+                        "wood-dark": "#120b06",
+                        "wood-light": "#36261b",
+                        "parchment": "#eadabb",
+                        "parchment-dark": "#d4c19d",
+                        "ink": "#2a241f",
+                        "ink-light": "#4a4038",
+                        "gold": "#c18f3a",
+                        "gold-dark": "#8a6528",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    boxShadow: {
+                        'carved': 'inset 0 4px 8px rgba(0,0,0,0.9), inset 0 1px 3px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.1)',
+                        'parchment': '0 10px 25px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.3)',
+                        'nail': '2px 2px 4px rgba(0,0,0,0.6), inset 1px 1px 2px rgba(255,255,255,0.2)',
+                        'seal': '0 4px 6px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.4)'
+                    },
+                    backgroundImage: {
+                        'wood-pattern': 'linear-gradient(to right, #1e140c, #120b06 20%, #1e140c 40%, #26190f 60%, #1e140c 80%, #120b06)',
+                        'parchment-texture': 'linear-gradient(135deg, #eadabb 0%, #d4c19d 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Newsreader', serif; }
+        
+        .wood-board {
+            background-color: #1e140c;
+            background-image: 
+                linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.3) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(0,0,0,0.1) 40px, rgba(0,0,0,0.1) 42px),
+                linear-gradient(180deg, #120b06 0%, #1e140c 20%, #26190f 50%, #1e140c 80%, #120b06 100%);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+        }
+
+        .carved-text {
+            color: #120b06;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.1), 0 -1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .parchment-bg {
+            background-color: #eadabb;
+            background-image: 
+                radial-gradient(circle at 100% 100%, rgba(0,0,0,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 0% 0%, rgba(255,255,255,0.2) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .parchment-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .rough-edge {
+            clip-path: polygon(
+                0% 2%, 2% 0%, 98% 1%, 100% 3%, 
+                99% 98%, 97% 100%, 3% 99%, 0% 97%
+            );
+        }
+
+        .nail {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #2a241f;
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.6), inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.2);
+            z-index: 10;
+        }
+        
+        .nail-top-left { top: 12px; left: 12px; }
+        .nail-top-right { top: 12px; right: 12px; }
+        .nail-bottom-left { bottom: 12px; left: 12px; }
+        .nail-bottom-right { bottom: 12px; right: 12px; }
+        .nail-top-center { top: 12px; left: 50%; transform: translateX(-50%); }
+        .nail-bottom-center { bottom: 12px; left: 50%; transform: translateX(-50%); }
+
+        .dotted-leader {
+            border-bottom: 2px dotted #8D7C65;
+            position: relative;
+            top: -6px;
+        }
+
+        .rank-row {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .rank-row::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #a12312;
+            transition: width 0.3s ease;
+        }
+
+        .rank-row:hover::after {
+            width: 100%;
+        }
+
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #c42b17, #8B1E0F 60%, #4a0d06);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.3);
+            background: transparent;
+        }
+
+        .decree-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .decree-card:hover {
+            transform: translateY(-4px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 8px 15px rgba(0,0,0,0.4);
+            z-index: 20;
+        }
+
+    </style>
+</head>
+<body class="bg-background-dark min-h-screen text-slate-100 flex flex-col font-display antialiased overflow-x-hidden selection:bg-primary/30 selection:text-white">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-wood-light bg-wood-base/90 px-6 py-4 sticky top-0 z-50 shadow-md backdrop-blur-sm">
+<div class="flex items-center gap-3 text-parchment">
+<div class="size-6 text-primary drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+<span class="material-symbols-outlined text-[24px]">map</span>
+</div>
+<h1 class="text-parchment text-xl font-bold leading-tight tracking-wide uppercase">The Cartographer's Table</h1>
+</div>
+<nav class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-6 hidden md:flex">
+<a class="text-parchment-dark hover:text-parchment transition-colors text-sm font-medium leading-normal tracking-wide uppercase flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">table_restaurant</span>
+                    The Tabletop
+                </a>
+<a class="text-parchment-dark hover:text-parchment transition-colors text-sm font-medium leading-normal tracking-wide uppercase flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+                    The Ledger
+                </a>
+<a class="text-parchment-dark hover:text-parchment transition-colors text-sm font-medium leading-normal tracking-wide uppercase flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">push_pin</span>
+                    The Quest Board
+                </a>
+<a class="text-primary font-bold text-sm leading-normal tracking-wide uppercase flex items-center gap-1 border-b-2 border-primary pb-1" href="#">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+                    The Tavern Post
+                </a>
+</div>
+<button class="md:hidden text-parchment">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+<main class="flex-1 wood-board p-4 md:p-8 lg:p-12 relative flex flex-col items-center">
+<div class="w-full max-w-6xl mb-10 text-center relative z-10">
+<p class="text-gold-dark text-lg font-medium tracking-[0.2em] uppercase mb-2">Global Standings &amp; Royal Announcements</p>
+<h2 class="text-5xl md:text-7xl font-black uppercase tracking-wider carved-text py-4 px-8 inline-block bg-wood-base/50 rounded-xl border border-black/50 shadow-[inset_0_4px_12px_rgba(0,0,0,0.9)]">
+                The Tavern Post
+            </h2>
+</div>
+<div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative z-10">
+<section class="lg:col-span-5 flex flex-col gap-6">
+<div class="mb-6 bg-wood-dark/60 p-6 rounded-lg border-2 border-wood-light shadow-[inset_0_4px_12px_rgba(0,0,0,0.8)] text-center relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-wood-base px-4 text-gold text-sm font-bold uppercase tracking-widest">Current Vanguard</div>
+<div class="text-3xl font-black text-parchment drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-2">
+<span class="material-symbols-outlined text-gold mr-2 align-middle text-[32px]">workspace_premium</span>
+                        The Crimson Fangs
+                    </div>
+<div class="text-parchment-dark mt-2 text-xl font-medium">Total Power: <span class="text-primary font-bold">14,250</span></div>
+</div>
+<div class="parchment-bg rough-edge p-8 md:p-10 shadow-parchment relative">
+<div class="nail nail-top-center"></div>
+<div class="nail nail-bottom-center"></div>
+<h3 class="text-3xl font-bold text-ink mb-8 text-center border-b-2 border-ink-light pb-4 uppercase tracking-wider relative">
+                        Guild Rankings
+                        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-parchment px-2 text-ink-light">
+<span class="material-symbols-outlined text-[16px]">swords</span>
+</span>
+</h3>
+<ul class="space-y-4 font-medium text-lg text-ink">
+<li class="flex items-baseline rank-row cursor-pointer py-1">
+<span class="w-8 text-ink-light font-bold">#2</span>
+<span class="font-bold">Ironclad Syndicate</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="font-bold">12,840</span>
+</li>
+<li class="flex items-baseline rank-row cursor-pointer py-1">
+<span class="w-8 text-ink-light font-bold">#3</span>
+<span class="font-bold">Moonlight Wanderers</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="font-bold">11,500</span>
+</li>
+<li class="flex items-baseline rank-row cursor-pointer py-1">
+<span class="w-8 text-ink-light font-bold">#4</span>
+<span class="font-bold">Goblin Smashers</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="font-bold">9,210</span>
+</li>
+<li class="flex items-baseline rank-row cursor-pointer py-1 opacity-90">
+<span class="w-8 text-ink-light font-bold">#5</span>
+<span class="">Arcane Seekers</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="">8,950</span>
+</li>
+<li class="flex items-baseline rank-row cursor-pointer py-1 opacity-80">
+<span class="w-8 text-ink-light font-bold">#6</span>
+<span class="">The Rusty Daggers</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="">7,420</span>
+</li>
+<li class="flex items-baseline rank-row cursor-pointer py-1 opacity-70">
+<span class="w-8 text-ink-light font-bold">#7</span>
+<span class="">Shield Bearers</span>
+<div class="flex-grow dotted-leader mx-3"></div>
+<span class="">6,100</span>
+</li>
+</ul>
+<div class="mt-8 text-center">
+<p class="text-sm text-ink-light italic">Rankings updated daily at dusk.</p>
+</div>
+</div>
+</section>
+<section class="lg:col-span-7 flex flex-col gap-8 relative">
+<h3 class="text-3xl font-bold text-parchment-dark mb-2 border-b border-wood-light pb-2 uppercase tracking-widest hidden lg:block drop-shadow-md">
+                    Royal Decrees
+                </h3>
+<article class="parchment-bg rough-edge p-8 md:p-10 shadow-parchment relative decree-card rotate-[1deg] w-[95%] mx-auto lg:mx-0 lg:ml-auto cursor-pointer">
+<div class="nail nail-top-left"></div>
+<div class="nail nail-top-right"></div>
+<div class="absolute -top-4 -right-4 w-16 h-16 wax-seal z-10 rotate-12">
+<span class="material-symbols-outlined text-[28px] text-white/80">local_fire_department</span>
+</div>
+<header class="text-center mb-6 border-double border-b-4 border-ink-light pb-4">
+<p class="text-gold-dark font-bold tracking-[0.3em] text-sm uppercase mb-2">By Order of the Crown</p>
+<h4 class="text-4xl font-black text-primary uppercase tracking-wide leading-tight">The Dragon's Maw Opens</h4>
+<p class="text-ink-light italic mt-2">Issued on the 14th of Frostfall</p>
+</header>
+<div class="text-ink text-lg leading-relaxed space-y-4">
+<p class="first-letter:text-5xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-2 first-letter:mt-1">
+                            Brave adventurers, hear this decree. The seals binding the central peak have weakened. Three dungeons have been cleared by vanguard guilds, and the path to the Dragon Boss is now exposed.
+                        </p>
+<p>
+                            All able-bodied teams are summoned to pool their resources and prepare for the final assault. The bounty is unprecedented. Failure means ash.
+                        </p>
+</div>
+<div class="mt-8 text-center text-ink-light font-bold text-xl opacity-50">
+                        ~ ⚜ ~
+                    </div>
+</article>
+<article class="parchment-bg rough-edge p-8 md:p-10 shadow-parchment relative decree-card -rotate-[2deg] w-[90%] mx-auto lg:mx-0 cursor-pointer">
+<div class="nail nail-top-center"></div>
+<div class="absolute -bottom-4 right-10 w-12 h-12 wax-seal z-10 -rotate-12 bg-gray-800">
+<span class="material-symbols-outlined text-[20px] text-white/80">gavel</span>
+</div>
+<header class="text-center mb-4">
+<h4 class="text-2xl font-black text-ink uppercase tracking-wide border-b border-ink-light pb-2 inline-block">Bounty Adjusted: Goblin Ambush</h4>
+</header>
+<div class="text-ink text-md leading-relaxed">
+<p>
+                            Due to unexpected casualties, the wager multiplier for the <strong>Goblin Ambush</strong> side quest on the Western Road has been increased. High risk, high Agility rewards. Consult The Quest Board immediately.
+                        </p>
+</div>
+</article>
+</section>
+</div>
+<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)] z-0 mix-blend-multiply"></div>
+</main>
+</body></html>

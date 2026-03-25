@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Quest Board - The Cartographer's Table</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#a12312",
+              "background-light": "#f8f6f6",
+              "background-dark": "#211311",
+              "surface-paper": "#EADABB",
+              "ink-dark": "#2A241F",
+              "ink-muted": "#8D7C65",
+            },
+            fontFamily: {
+              "display": ["Newsreader", "serif"],
+              "handwriting": ["Caveat", "cursive"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            boxShadow: {
+              'paper': '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
+              'paper-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #1a0f0d;
+            background-image: radial-gradient(circle at center, #2a1a17 0%, #110908 100%);
+            /* Simulated corkboard texture via multiple backgrounds */
+            background-size: 20px 20px;
+        }
+        
+        .paper-texture {
+            position: relative;
+        }
+        .paper-texture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        .bounty-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .bounty-card:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 50;
+        }
+
+        .wax-seal {
+            transition: transform 0.1s ease-in-out;
+        }
+        .wax-seal:active {
+            transform: scale(0.9);
+        }
+        
+        /* Rough edges simulation */
+        .rough-edge {
+            clip-path: polygon(
+                0% 2%, 2% 0%, 98% 1%, 100% 3%, 
+                99% 98%, 97% 100%, 3% 99%, 0% 97%
+            );
+        }
+    </style>
+</head>
+<body class="font-display text-slate-100 min-h-screen overflow-x-hidden flex flex-col">
+<!-- Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b-2 border-primary/30 bg-[#1a0f0d]/90 backdrop-blur-md px-8 py-4 shadow-lg">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-3xl">map</span>
+<h1 class="text-2xl font-bold leading-tight tracking-wide text-[#EADABB]">The Cartographer's Table</h1>
+</div>
+<nav class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-8">
+<a class="text-[#8D7C65] hover:text-[#EADABB] transition-colors text-lg font-medium tracking-wide" href="#">The Tabletop</a>
+<a class="text-[#8D7C65] hover:text-[#EADABB] transition-colors text-lg font-medium tracking-wide" href="#">The Ledger</a>
+<a class="text-primary border-b-2 border-primary pb-1 text-lg font-bold tracking-wide" href="#">The Quest Board</a>
+<a class="text-[#8D7C65] hover:text-[#EADABB] transition-colors text-lg font-medium tracking-wide" href="#">The Tavern Post</a>
+</div>
+<div class="flex gap-4 ml-8">
+<button class="flex items-center justify-center rounded bg-primary/20 hover:bg-primary/40 text-primary border border-primary/50 transition-colors h-10 w-10 shadow-sm">
+<span class="material-symbols-outlined">work</span>
+</button>
+<button class="flex items-center justify-center rounded bg-primary/20 hover:bg-primary/40 text-primary border border-primary/50 transition-colors h-10 w-10 shadow-sm">
+<span class="material-symbols-outlined">swords</span>
+</button>
+<button class="flex items-center justify-center rounded bg-primary/20 hover:bg-primary/40 text-primary border border-primary/50 transition-colors h-10 w-10 shadow-sm">
+<span class="material-symbols-outlined">explore</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Main Content: The Quest Board -->
+<main class="flex-1 relative w-full max-w-7xl mx-auto p-8 lg:p-12">
+<!-- Board Header -->
+<div class="text-center mb-12 relative z-10">
+<div class="inline-block bg-[#110908] border-4 border-[#2a1a17] px-8 py-4 rounded-sm shadow-2xl relative transform -rotate-1">
+<!-- Nails -->
+<div class="absolute top-2 left-2 w-3 h-3 bg-zinc-700 rounded-full shadow-inner"></div>
+<div class="absolute top-2 right-2 w-3 h-3 bg-zinc-700 rounded-full shadow-inner"></div>
+<div class="absolute bottom-2 left-2 w-3 h-3 bg-zinc-700 rounded-full shadow-inner"></div>
+<div class="absolute bottom-2 right-2 w-3 h-3 bg-zinc-700 rounded-full shadow-inner"></div>
+<h2 class="text-[#EADABB] text-5xl font-black tracking-wider uppercase drop-shadow-md">Bounties</h2>
+<p class="text-[#8D7C65] text-xl mt-2 italic">Pin your hopes and wager your stats against these perilous tasks.</p>
+</div>
+</div>
+<!-- Masonry Grid for Bounties -->
+<div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 relative">
+<!-- Bounty 1 -->
+<article class="bounty-card relative break-inside-avoid bg-[#EADABB] text-[#2A241F] p-6 shadow-paper hover:shadow-paper-hover rough-edge paper-texture" style="transform: rotate(-2deg);">
+<!-- Pin -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-zinc-400 shadow-[0_2px_4px_rgba(0,0,0,0.5)] border border-zinc-300 z-10">
+<div class="w-1 h-1 bg-zinc-200 rounded-full absolute top-1 left-1"></div>
+</div>
+<header class="text-center border-b-2 border-[#8D7C65]/30 pb-4 mb-4 mt-2">
+<h3 class="text-3xl font-bold text-primary mb-1">Goblin Ambush</h3>
+<p class="text-sm font-bold text-[#8D7C65] uppercase tracking-widest">Wagon Trail</p>
+</header>
+<div class="mb-6 h-32 bg-[#D1C1A3] rounded-sm border border-[#8D7C65]/20 flex items-center justify-center overflow-hidden relative">
+<!-- Placeholder for sketch -->
+<span class="material-symbols-outlined text-6xl text-[#8D7C65]/50 absolute">pest_control</span>
+<div class="absolute inset-0 bg-gradient-to-t from-[#EADABB]/80 to-transparent"></div>
+</div>
+<p class="text-lg leading-relaxed mb-6 italic">A band of unusually coordinated goblins has been raiding the merchant caravans. They strike fast and fade into the dense woods. Agility is required to outmaneuver them.</p>
+<div class="bg-[#D1C1A3]/30 p-4 rounded-sm border border-[#8D7C65]/40 mb-6">
+<label class="block text-sm font-bold text-[#8D7C65] uppercase mb-2">Wager Stats</label>
+<div class="flex items-center gap-2">
+<select class="form-select w-full bg-transparent border-b-2 border-primary/50 focus:ring-0 focus:border-primary text-xl font-bold text-primary p-1 rounded-none">
+<option value="5">5 Agility</option>
+<option selected="" value="10">10 Agility</option>
+<option value="20">20 Agility</option>
+</select>
+<span class="text-xl font-bold text-[#8D7C65]">to double</span>
+</div>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex gap-1 text-[#2A241F]" title="Risk Level: 2">
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl opacity-20">skull</span>
+</div>
+<button class="wax-seal relative w-16 h-16 bg-primary rounded-full shadow-[0_4px_10px_rgba(161,35,18,0.5)] flex items-center justify-center border-2 border-red-900 group">
+<div class="absolute inset-1 border border-red-400/30 rounded-full"></div>
+<span class="material-symbols-outlined text-red-200 text-3xl group-hover:scale-110 transition-transform">contract</span>
+<span class="sr-only">Sign Contract</span>
+</button>
+</div>
+</article>
+<!-- Bounty 2 -->
+<article class="bounty-card relative break-inside-avoid bg-[#f0e4cd] text-[#2A241F] p-8 shadow-paper hover:shadow-paper-hover rough-edge paper-texture" style="transform: rotate(3deg);">
+<!-- Pin -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-red-800 shadow-[0_2px_4px_rgba(0,0,0,0.5)] border border-red-900 z-10"></div>
+<header class="text-center border-b-2 border-[#8D7C65]/30 pb-4 mb-4 mt-2">
+<h3 class="text-4xl font-bold text-primary mb-1">The Slumbering Troll</h3>
+<p class="text-sm font-bold text-[#8D7C65] uppercase tracking-widest">Underbridge</p>
+</header>
+<p class="text-lg leading-relaxed mb-6">It blocks the main trade route, demanding a toll of raw meat or raw power. We prefer to pay in the latter. Requires significant strength to budge.</p>
+<div class="bg-primary/10 p-4 rounded-sm border border-primary/20 mb-6">
+<label class="block text-sm font-bold text-primary uppercase mb-2">Wager Stats</label>
+<div class="flex items-center gap-2">
+<select class="form-select w-full bg-transparent border-b-2 border-primary focus:ring-0 focus:border-primary text-2xl font-bold text-primary p-1 rounded-none">
+<option value="15">15 Power</option>
+<option value="25">25 Power</option>
+</select>
+</div>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex gap-1 text-primary" title="Risk Level: 3">
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl">skull</span>
+</div>
+<button class="wax-seal relative w-20 h-20 bg-primary rounded-full shadow-[0_4px_10px_rgba(161,35,18,0.5)] flex items-center justify-center border-4 border-red-900 group">
+<div class="absolute inset-1 border border-red-400/30 rounded-full"></div>
+<span class="font-bold text-red-200 text-lg uppercase tracking-wider group-hover:scale-105 transition-transform">Seal</span>
+</button>
+</div>
+</article>
+<!-- Bounty 3 (Small) -->
+<article class="bounty-card relative break-inside-avoid bg-[#EADABB] text-[#2A241F] p-5 shadow-paper hover:shadow-paper-hover rough-edge paper-texture" style="transform: rotate(-1deg);">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-zinc-800 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
+<header class="mb-3 mt-2">
+<h3 class="text-2xl font-bold text-zinc-900">Lost Grimoire</h3>
+</header>
+<p class="text-base leading-relaxed mb-4 text-[#8D7C65]">Recover the stolen texts from the imp nest. Requires sharp minds.</p>
+<div class="flex items-center gap-4 mb-4">
+<span class="font-bold text-lg border-b border-primary/50 pb-1">10 Brain Power</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex gap-1 text-[#2A241F]">
+<span class="material-symbols-outlined text-lg">skull</span>
+<span class="material-symbols-outlined text-lg opacity-20">skull</span>
+<span class="material-symbols-outlined text-lg opacity-20">skull</span>
+</div>
+<button class="wax-seal w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-md border-2 border-red-900">
+<span class="material-symbols-outlined text-red-200 text-xl">history_edu</span>
+</button>
+</div>
+</article>
+<!-- Bounty 4 -->
+<article class="bounty-card relative break-inside-avoid bg-[#e3d3b3] text-[#2A241F] p-6 shadow-paper hover:shadow-paper-hover rough-edge paper-texture" style="transform: rotate(4deg);">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-zinc-400 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
+<header class="text-center border-b-2 border-zinc-800/30 pb-4 mb-4 mt-2">
+<h3 class="text-2xl font-bold text-zinc-900 mb-1">Cursed Springs</h3>
+<p class="text-sm font-bold text-zinc-600 uppercase tracking-widest">Cleansing Ritual</p>
+</header>
+<div class="mb-4 h-24 bg-zinc-800/5 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-zinc-800/40">water_drop</span>
+</div>
+<p class="text-lg leading-relaxed mb-6">The healing waters have turned foul. Channel your mana to purify the source before the corruption spreads.</p>
+<div class="bg-zinc-800/5 p-4 rounded-sm border border-zinc-800/20 mb-6">
+<label class="block text-sm font-bold text-zinc-600 uppercase mb-2">Wager Stats</label>
+<select class="form-select w-full bg-transparent border-b-2 border-zinc-800 focus:ring-0 text-xl font-bold text-zinc-900 p-1 rounded-none">
+<option selected="" value="15">15 Mana</option>
+<option value="30">30 Mana</option>
+</select>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex gap-1 text-zinc-800">
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl">skull</span>
+<span class="material-symbols-outlined text-xl opacity-20">skull</span>
+</div>
+<button class="wax-seal w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center border-2 border-red-900">
+<span class="material-symbols-outlined text-red-200 text-2xl">local_fire_department</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+</body></html>

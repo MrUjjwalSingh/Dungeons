@@ -1,0 +1,17 @@
+/**
+ * Middleware to verify admin access via the x-admin-key header.
+ */
+const requireAdmin = (req, res, next) => {
+    const adminKey = req.headers['x-admin-key'];
+
+    if (!adminKey || adminKey !== process.env.ADMIN_KEY) {
+        return res.status(403).json({
+            error: 'Forbidden',
+            message: 'A valid x-admin-key header is required for this action.',
+        });
+    }
+
+    next();
+};
+
+module.exports = { requireAdmin };

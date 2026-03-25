@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Cartographer's Table - The Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a12312",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211311",
+                        "leather": "#1a0f0d",
+                        "leather-light": "#2d1b18",
+                        "parchment-dark": "#d4c4a8",
+                        "parchment": "#e6d5b8",
+                        "ink": "#1c1412"
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "sm": "0.125rem"
+                    },
+                    boxShadow: {
+                        'book': '0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 2px 10px rgba(255, 255, 255, 0.1)',
+                        'page': '2px 0 10px rgba(0,0,0,0.2), inset 10px 0 20px rgba(0,0,0,0.1)',
+                        'card': '2px 4px 8px rgba(0,0,0,0.3)',
+                        'stamp': 'inset 0 2px 4px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.5)'
+                    },
+                    backgroundImage: {
+                        'wood-texture': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' opacity=\'0.08\'/%3E%3C/svg%3E")',
+                        'paper-texture': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.04\' numOctaves=\'5\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' opacity=\'0.05\'/%3E%3C/svg%3E")'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Newsreader', serif; }
+        
+        .tally-mark {
+            width: 4px;
+            height: 24px;
+            background-color: theme('colors.ink');
+            display: inline-block;
+            margin-right: 6px;
+            border-radius: 2px;
+            transform: rotate(calc(var(--rot, 0) * 3deg));
+        }
+        
+        .tally-group {
+            position: relative;
+            display: inline-block;
+            margin-right: 12px;
+        }
+        
+        .tally-cross {
+            position: absolute;
+            top: 50%;
+            left: -4px;
+            width: 120%;
+            height: 4px;
+            background-color: theme('colors.ink');
+            transform: translateY(-50%) rotate(-15deg);
+            border-radius: 2px;
+        }
+
+        .tooltip-ink {
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #c4321c, #8b1e0f 70%, #4a0d06);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden flex flex-col font-display">
+<!-- Wood Background Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-50 bg-wood-texture z-[-1]"></div>
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-solid border-b-primary/30 px-10 py-4 bg-background-dark/80 backdrop-blur-sm z-20">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-3xl">menu_book</span>
+<h1 class="text-2xl font-bold tracking-wide">The Cartographer's Table</h1>
+</div>
+<nav class="flex items-center gap-8">
+<a class="text-slate-300 hover:text-primary transition-colors text-lg font-medium" href="#">The Tabletop</a>
+<a class="text-primary border-b-2 border-primary pb-1 text-lg font-bold" href="#">The Ledger</a>
+<a class="text-slate-300 hover:text-primary transition-colors text-lg font-medium" href="#">The Quest Board</a>
+<a class="text-slate-300 hover:text-primary transition-colors text-lg font-medium" href="#">Tavern Post</a>
+</nav>
+</header>
+<!-- Main Content - The Ledger -->
+<main class="flex-1 flex items-center justify-center p-8 relative">
+<!-- Book Container -->
+<div class="w-[90%] max-w-[1400px] h-[80vh] min-h-[600px] bg-leather rounded-xl shadow-book relative flex p-4 border border-leather-light ring-1 ring-black/50">
+<!-- Book Spine -->
+<div class="absolute left-1/2 top-0 bottom-0 w-12 -translate-x-1/2 bg-gradient-to-r from-leather via-leather-light to-leather z-0 border-x border-black/40 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]"></div>
+<!-- Bookmarks -->
+<div class="absolute -top-2 left-[20%] w-6 h-16 bg-primary shadow-md z-0 rounded-b-md"></div>
+<div class="absolute -top-2 left-[25%] w-4 h-12 bg-[#c18f3a] shadow-md z-0 rounded-b-md"></div>
+<!-- Left Page: Stats -->
+<div class="flex-1 bg-parchment-dark rounded-l-sm rounded-r-none relative overflow-hidden shadow-page border border-black/10 z-10 m-2 flex flex-col">
+<div class="absolute inset-0 bg-paper-texture pointer-events-none opacity-40"></div>
+<div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/20 to-transparent pointer-events-none"></div>
+<div class="p-12 h-full flex flex-col relative z-20">
+<h2 class="text-4xl font-bold text-ink mb-2 border-b-2 border-ink/20 pb-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">bar_chart</span>
+                        Guild Reserves
+                    </h2>
+<p class="text-ink/70 italic mb-8">Pooled attributes from all successful expeditions.</p>
+<div class="flex flex-col gap-8 flex-1">
+<!-- Stat Row: Power -->
+<div class="group relative flex items-start">
+<div class="w-32 pt-1 text-xl font-bold text-ink">Power</div>
+<div class="flex-1 flex flex-wrap gap-y-4">
+<!-- Group 1 -->
+<div class="tally-group">
+<div class="tally-mark" style="--rot: -1;"></div>
+<div class="tally-mark" style="--rot: 1;"></div>
+<div class="tally-mark" style="--rot: 0;"></div>
+<div class="tally-mark" style="--rot: -2;"></div>
+<div class="tally-cross"></div>
+</div>
+<!-- Group 2 -->
+<div class="tally-group">
+<div class="tally-mark" style="--rot: 1;"></div>
+<div class="tally-mark" style="--rot: -1;"></div>
+</div>
+</div>
+<!-- Tooltip -->
+<div class="absolute left-32 -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-ink text-parchment px-3 py-1 rounded tooltip-ink text-sm font-bold z-30 flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[16px] text-primary">water_drop</span> 7
+                            </div>
+</div>
+<!-- Stat Row: HP -->
+<div class="group relative flex items-start">
+<div class="w-32 pt-1 text-xl font-bold text-ink">Vitality</div>
+<div class="flex-1 flex flex-wrap gap-y-4">
+<div class="tally-group">
+<div class="tally-mark" style="--rot: 0;"></div>
+<div class="tally-mark" style="--rot: -1;"></div>
+<div class="tally-mark" style="--rot: 2;"></div>
+<div class="tally-mark" style="--rot: -1;"></div>
+<div class="tally-cross"></div>
+</div>
+<div class="tally-group">
+<div class="tally-mark" style="--rot: 1;"></div>
+<div class="tally-mark" style="--rot: 0;"></div>
+<div class="tally-mark" style="--rot: -2;"></div>
+<div class="tally-mark" style="--rot: 1;"></div>
+<div class="tally-cross"></div>
+</div>
+<div class="tally-group">
+<div class="tally-mark" style="--rot: -1;"></div>
+</div>
+</div>
+<div class="absolute left-32 -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-ink text-parchment px-3 py-1 rounded tooltip-ink text-sm font-bold z-30 flex items-center gap-1 shadow-lg">
+<span class="material-symbols-outlined text-[16px] text-primary">water_drop</span> 11
+                            </div>
+</div>
+</div>
+<div class="mt-auto text-right text-ink/40 text-sm italic">
+                        Page 42
+                    </div>
+</div>
+</div>
+<!-- Right Page: Roster -->
+<div class="flex-1 bg-parchment-dark rounded-r-sm rounded-l-none relative overflow-hidden shadow-page border border-black/10 z-10 m-2 flex flex-col">
+<div class="absolute inset-0 bg-paper-texture pointer-events-none opacity-40"></div>
+<div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/20 to-transparent pointer-events-none"></div>
+<div class="p-12 h-full flex flex-col relative z-20">
+<h2 class="text-4xl font-bold text-ink mb-2 border-b-2 border-ink/20 pb-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">badge</span>
+                        Active Roster
+                    </h2>
+<p class="text-ink/70 italic mb-8">Registered adventurers and their certified disciplines.</p>
+<div class="flex flex-col gap-6 overflow-y-auto pr-4 pb-4">
+<!-- License Card 1 -->
+<div class="bg-parchment p-4 rounded-sm shadow-card border border-ink/10 relative transform rotate-1 hover:rotate-0 transition-transform w-[85%] mx-auto">
+<!-- Tape -->
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-white/40 backdrop-blur-sm border border-white/20 transform -rotate-2 shadow-sm"></div>
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-ink/5 border border-ink/20 flex items-center justify-center rounded-sm overflow-hidden relative">
+<span class="material-symbols-outlined text-4xl text-ink/30">face</span>
+</div>
+<div class="flex-1">
+<h3 class="text-xl font-bold text-ink border-b border-ink/20 pb-1 mb-2">Thorne Ironweaver</h3>
+<p class="text-sm text-ink/70 mb-1"><strong class="text-ink">Rank:</strong> Veteran</p>
+<p class="text-sm text-ink/70"><strong class="text-ink">Joined:</strong> 4th Moon, YR 84</p>
+</div>
+<!-- Wax Stamp -->
+<div class="absolute -right-4 -bottom-4 w-16 h-16 rounded-full wax-seal shadow-stamp flex items-center justify-center transform rotate-12 ring-2 ring-primary/20">
+<span class="material-symbols-outlined text-parchment text-2xl drop-shadow-md">swords</span>
+</div>
+</div>
+</div>
+<!-- License Card 2 -->
+<div class="bg-parchment p-4 rounded-sm shadow-card border border-ink/10 relative transform -rotate-1 hover:rotate-0 transition-transform w-[85%] mx-auto ml-12">
+<!-- Thumbtack -->
+<div class="absolute top-2 left-4 w-3 h-3 rounded-full bg-slate-300 shadow-[2px_2px_4px_rgba(0,0,0,0.5),inset_-1px_-1px_2px_rgba(0,0,0,0.3)] z-10">
+<div class="absolute inset-1 rounded-full bg-slate-100"></div>
+</div>
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-ink/5 border border-ink/20 flex items-center justify-center rounded-sm overflow-hidden relative">
+<span class="material-symbols-outlined text-4xl text-ink/30">face_3</span>
+</div>
+<div class="flex-1">
+<h3 class="text-xl font-bold text-ink border-b border-ink/20 pb-1 mb-2">Elara Moonwhisper</h3>
+<p class="text-sm text-ink/70 mb-1"><strong class="text-ink">Rank:</strong> Adept</p>
+<p class="text-sm text-ink/70"><strong class="text-ink">Joined:</strong> 1st Moon, YR 85</p>
+</div>
+<!-- Wax Stamp -->
+<div class="absolute -right-2 top-2 w-14 h-14 rounded-full wax-seal shadow-stamp flex items-center justify-center transform -rotate-12 ring-2 ring-primary/20">
+<span class="material-symbols-outlined text-parchment text-xl drop-shadow-md">auto_fix_high</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto text-left text-ink/40 text-sm italic">
+                        Page 43
+                    </div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
