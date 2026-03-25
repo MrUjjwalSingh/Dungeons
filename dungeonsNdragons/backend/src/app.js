@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 
 const teamRoutes = require('./routes/teamRoutes');
-const questRoutes = require('./routes/questRoutes');
 const dungeonRoutes = require('./routes/dungeonRoutes');
 const boardRoutes = require('./routes/boardRoutes');
 const dragonRoutes = require('./routes/dragonRoutes');
@@ -23,7 +22,6 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/teams', teamRoutes);
-app.use('/api/quests', questRoutes);
 app.use('/api/dungeons', dungeonRoutes);
 app.use('/api/board', boardRoutes);
 app.use('/api/dragon', dragonRoutes);

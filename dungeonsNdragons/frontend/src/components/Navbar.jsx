@@ -6,9 +6,9 @@ const ENQUIRY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd6Yza2TDpYL6T85NH
 
 const links = [
     { to: '/', label: 'Home', icon: 'fort' },
-    { to: '/quests', label: 'Quests', icon: 'auto_stories' },
     { to: '/ledger', label: 'Ledger', icon: 'menu_book' },
     { to: '/tavern', label: 'Tavern', icon: 'sports_bar' },
+    { to: '/knights', label: 'Knights', icon: 'shield_locked' },
 ];
 
 export default function Navbar() {
@@ -17,7 +17,10 @@ export default function Navbar() {
     const teamName = localStorage.getItem('teamName') || null;
     const [selectorOpen, setSelectorOpen] = useState(false);
 
-    const isAdmin = location.pathname.includes('/admin') || location.pathname.includes('/gm-portal');
+    const isAdmin =
+        location.pathname.includes('/admin') ||
+        location.pathname.includes('/gm-portal') ||
+        location.pathname.includes('/knights');
 
     return (
         <>

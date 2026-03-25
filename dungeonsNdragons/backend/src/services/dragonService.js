@@ -19,10 +19,6 @@ const dragonService = {
         const team = await Team.findById(teamId);
         if (!team) throw new Error('Team not found');
 
-        if (team.equipment.length < 3) {
-            throw new Error('Team needs at least 3 equipment pieces to fight the dragon');
-        }
-
         if (victory) {
             await Announcement.create({
                 message: `🐉🏆 ${team.name} has SLAIN THE DRAGON! The realm is saved! All hail the victorious guild!`

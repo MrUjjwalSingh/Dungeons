@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
-import QuestBoardPage from './pages/QuestBoardPage';
 import LedgerPage from './pages/LedgerPage';
 import TavernPostPage from './pages/TavernPostPage';
 import RegisterPage from './pages/RegisterPage';
@@ -19,98 +20,75 @@ const MMI_TIPS = [
   "Diversify your stats like you diversify your portfolio.",
 ];
 
-/* ── MMI Loading Screen ─────────────────────────────────────────── */
+/* ── Lottie Intro Screen ───────────────────────────────────── */
 function LoadingScreen({ onDone }) {
-  const [tipIdx] = useState(() => Math.floor(Math.random() * MMI_TIPS.length));
-  const [progress, setProgress] = useState(0);
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress(p => {
-        if (p >= 100) { clearInterval(timer); return 100; }
-        return p + 2;
-      });
-    }, 40);
-    const done = setTimeout(onDone, 2500);
-    return () => { clearInterval(timer); clearTimeout(done); };
+    const t = setTimeout(onDone, 3800);
+    return () => clearTimeout(t);
   }, [onDone]);
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 99999,
-      background: 'radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 100%)',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      fontFamily: 'Space Grotesk, sans-serif',
-    }}>
-      <style>{`
-                @keyframes mmiPulse { 0%,100% { opacity:0.7; transform:scale(1); } 50% { opacity:1; transform:scale(1.05); } }
-                @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-            `}</style>
-
-      {/* MMI Logo */}
-      <div style={{
-        animation: 'mmiPulse 2s ease-in-out infinite',
-        marginBottom: 24,
-        textAlign: 'center',
-      }}>
-        <img src="/assets/mmi-logo.png" alt="Money Mantra Investments"
-          style={{
-            width: 'clamp(140px, 35vw, 220px)',
-            height: 'auto',
-            filter: 'drop-shadow(0 0 30px rgba(255,191,0,0.3))',
-            borderRadius: 12,
-          }} />
-      </div>
-
-      {/* Loader bar */}
-      <div style={{
-        width: 'min(300px, 80vw)',
-        height: 4,
-        background: '#2a2a2a',
-        borderRadius: 2,
+    <motion.div
+      key="intro"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.7 } }}
+      transition={{ duration: 0.5 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 99999,
+        background: '#0a0605',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden',
-        marginBottom: 20,
-      }}>
-        <div style={{
-          height: '100%',
-          width: `${progress}%`,
-          background: 'linear-gradient(90deg, #ffbf00, #ffe2ab)',
-          borderRadius: 2,
-          transition: 'width 0.1s linear',
-          boxShadow: '0 0 12px rgba(255,191,0,0.4)',
-        }} />
-      </div>
+      }}
+    >
+      {/* Radial fire glow behind the animation */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'radial-gradient(ellipse 70% 60% at 50% 55%, rgba(200,80,0,0.18) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
 
-      {/* Game title */}
-      <p style={{
-        fontFamily: 'Noto Serif, serif',
-        fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
-        color: '#ffe2ab',
-        fontWeight: 700,
-        marginBottom: 8,
-        textAlign: 'center',
-      }}>Dragon's Awakening</p>
+      {/* Lottie */}
+      <motion.div
+        initial={{ scale: 0.85, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.7, ease: 'easeOut' }}
+        style={{ width: 'min(520px, 90vw)', height: 'min(520px, 90vw)' }}
+      >
+        <DotLottieReact
+          src="/Game Character Design with Dragon Effect.lottie"
+          autoplay
+          loop
+          style={{ width: '100%', height: '100%' }}
+        />
+      </motion.div>
 
-      <p style={{
-        fontSize: 11,
-        color: '#504532',
-        textAlign: 'center',
-        maxWidth: 360,
-        lineHeight: 1.6,
-      }}>Powered by Money Mantra Investments (MMI)</p>
-
-      {/* Financial tip */}
-      <p style={{
-        fontSize: 12,
-        color: '#00c8b4',
-        fontStyle: 'italic',
-        textAlign: 'center',
-        maxWidth: 380,
-        lineHeight: 1.5,
-        marginTop: 16,
-        opacity: 0.8,
-      }}>💰 {MMI_TIPS[tipIdx]}</p>
-    </div>
+      {/* Title text */}
+      <motion.div
+        initial={{ y: 24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
+        style={{ textAlign: 'center', marginTop: '-1.5rem' }}
+      >
+        <h1 style={{
+          fontFamily: 'Noto Serif, serif',
+          fontSize: 'clamp(1.8rem, 5vw, 3rem)',
+          fontWeight: 900,
+          color: '#ffe2ab',
+          textShadow: '0 0 40px rgba(255,140,0,0.5)',
+          letterSpacing: '0.04em',
+          marginBottom: 6,
+        }}>Dragon's Awakening</h1>
+        <p style={{
+          fontFamily: 'Space Grotesk',
+          fontSize: 12,
+          color: '#504532',
+          textTransform: 'uppercase',
+          letterSpacing: '0.2em',
+        }}>The realm stirs...</p>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -222,7 +200,10 @@ export default function App() {
 
   // Poll for ad breaks every 5 seconds (only on non-admin pages)
   useEffect(() => {
-    const isAdmin = window.location.pathname.includes('/admin') || window.location.pathname.includes('/gm-portal');
+    const isAdmin =
+      window.location.pathname.includes('/admin') ||
+      window.location.pathname.includes('/gm-portal') ||
+      window.location.pathname.includes('/knights');
     if (isAdmin) return;
 
     const poll = setInterval(async () => {
@@ -241,9 +222,16 @@ export default function App() {
   }, [lastAdId]);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#131313' }}>
-      {/* Loading Screen */}
-      {showLoader && <LoadingScreen onDone={dismissLoader} />}
+    <div style={{
+      minHeight: '100vh',
+      background: `
+        linear-gradient(rgba(10,6,5,0.82), rgba(10,6,5,0.82)),
+        url('/image.png') center/cover no-repeat fixed
+      `,
+    }}>
+      <AnimatePresence>
+        {showLoader && <LoadingScreen onDone={dismissLoader} />}
+      </AnimatePresence>
 
       {/* Full Screen Ad Break */}
       {showAd && <FullScreenAd onDone={dismissAd} />}
@@ -256,9 +244,9 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/quests" element={<QuestBoardPage />} />
         <Route path="/ledger" element={<LedgerPage />} />
         <Route path="/tavern" element={<TavernPostPage />} />
+        <Route path="/knights" element={<AdminPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/gm-portal" element={<AdminPage />} />
