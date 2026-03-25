@@ -10,8 +10,8 @@ const start = async () => {
         await connectDB();
         console.log('📦 Database ready');
 
-        app.listen(PORT, () => {
-            console.log(`🐲 Server is running on http://localhost:${PORT}`);
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server is running on port ${PORT}`);
             console.log(`📋 Health check: http://localhost:${PORT}/api/health`);
         });
     } catch (err) {
