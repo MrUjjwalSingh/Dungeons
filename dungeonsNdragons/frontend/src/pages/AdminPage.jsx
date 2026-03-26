@@ -693,7 +693,7 @@ function DragonEncounterSection({ teams, dungeons, adminKey, onDragonFight, onTo
             ) : displayList.length === 0 ? (
                 <p style={{ fontFamily: 'Work Sans', color: '#504532', fontStyle: 'italic', fontSize: 13 }}>No team matches <strong style={{ color: '#9c8f78' }}>"{teamFilter}"</strong>.</p>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(500px, 1fr))', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
                     {displayList.map(team => (
                         <TeamEncounterCard
                             key={team.id}
@@ -791,7 +791,7 @@ function OverridePanel({ teams, adminKey, onToast, onTeamsRefresh, onTeamSelect 
                 Directly add or subtract stat points from any team. Use this to fix bugs, correct mistakes, or adjust for edge cases.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                 <SearchSel label="Team" value={teamId} onChange={handleTeamChange} options={teamOpts} placeholder="Search team..." />
                 <Sel label="Stat" value={stat} onChange={setStat}
                     options={STATS.map(s => ({ value: s, label: `${STAT_ICONS[s]} ${s.replace('_', ' ')}` }))} />
@@ -804,7 +804,7 @@ function OverridePanel({ teams, adminKey, onToast, onTeamsRefresh, onTeamSelect 
                             padding: '6px 12px', borderRadius: 4,
                             background: s === stat ? 'rgba(180,130,255,0.15)' : '#201f1f',
                             border: `1px solid ${s === stat ? 'rgba(180,130,255,0.4)' : 'rgba(80,69,50,0.15)'}`,
-                            cursor: 'pointer', transition: 'all 0.2s',
+                            cursor: 'pointer', transition: 'all 0.2s', flex: '1 1 auto', textAlign: 'center'
                         }} onClick={() => setStat(s)}>
                             <span style={{ fontFamily: 'Space Grotesk', fontSize: 9, color: '#9c8f78', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>{STAT_ICONS[s]} {s.replace('_', ' ')}</span>
                             <span style={{ fontFamily: 'Space Grotesk', fontSize: 18, fontWeight: 700, color: s === stat ? '#b482ff' : '#ffe2ab' }}>{selectedTeam[s] ?? 0}</span>
@@ -815,7 +815,7 @@ function OverridePanel({ teams, adminKey, onToast, onTeamsRefresh, onTeamSelect 
 
             <div style={{ marginBottom: '0.875rem' }}>
                 <label style={lbl}>Delta (+ to add, − to subtract)</label>
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {[-10, -5, -1].map(v => (
                         <button key={v} onClick={() => setDelta(d => d + v)} style={{ padding: '6px 10px', background: 'rgba(166,27,16,0.15)', border: '1px solid rgba(166,27,16,0.3)', color: '#ff4500', fontFamily: 'Space Grotesk', fontWeight: 700, fontSize: 12, borderRadius: 4, cursor: 'pointer' }}>{v}</button>
                     ))}

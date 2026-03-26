@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTeam } from '../api/client';
 import FinancialTips from '../components/FinancialTips';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const STAT_LABELS = [
     { key: 'power', label: 'Power', icon: 'fitness_center' },
@@ -20,15 +22,89 @@ const CLASS_COLORS = {
     default: '#9c8f78',
 };
 
+function LedgerFlagAnimation({ teamName, onClose }) {
+    useEffect(() => {
+        const timer = setTimeout(onClose, 5000);
+        return () => clearTimeout(timer);
+    }, [onClose]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            onClick={onClose}
+            style={{
+                position: 'fixed', inset: 0, zIndex: 99999,
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center',
+                background: 'radial-gradient(ellipse at center, rgba(255,140,0,0.25) 0%, rgba(10,8,5,0.97) 70%)',
+                cursor: 'pointer',
+            }}
+        >
+            <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 14, delay: 0.1 }}
+                style={{ width: 380, height: 380, maxWidth: '80vw', maxHeight: '50vh' }}
+            >
+                <DotLottieReact
+                    src="/Dragon flag.lottie"
+                    autoplay
+                    loop
+                    style={{ width: '100%', height: '100%' }}
+                />
+            </motion.div>
+            
+            <motion.div
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.35, duration: 0.5 }}
+                style={{ textAlign: 'center', marginTop: '-1rem' }}
+            >
+                <h2 style={{
+                    fontFamily: 'Noto Serif, serif',
+                    fontSize: 'clamp(2rem, 6vw, 4rem)',
+                    fontWeight: 900,
+                    color: '#ffbf00',
+                    textShadow: '0 0 80px rgba(255,191,0,0.5)',
+                    marginBottom: '0.5rem',
+                    lineHeight: 1.1,
+                }}>
+                    A Challenger Appears!
+                </h2>
+                <p style={{
+                    fontFamily: 'Space Grotesk',
+                    fontSize: 'clamp(0.9rem, 2.5vw, 1.3rem)',
+                    color: '#ffe2ab',
+                    marginBottom: '1.5rem',
+                }}>
+                    {teamName} is unleashed and ready to face The Dragon.
+                </p>
+                <p style={{ fontFamily: 'Space Grotesk', fontSize: 11, color: '#504532', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+                    Click anywhere to continue
+                </p>
+            </motion.div>
+        </motion.div>
+    );
+}
+
 export default function LedgerPage() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showAnim, setShowAnim] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         const teamId = localStorage.getItem('teamId');
         if (!teamId) { setLoading(false); return; }
-        getTeam(teamId).then(d => setData(d)).finally(() => setLoading(false));
+        getTeam(teamId).then(d => {
+            setData(d);
+            const team = d.team || {};
+            const allMet = STAT_LABELS.every(s => (team[s.key] || 0) >= 100);
+            if (allMet) setShowAnim(true);
+        }).finally(() => setLoading(false));
     }, []);
 
     if (loading) return (
@@ -54,9 +130,19 @@ export default function LedgerPage() {
     const team = data.team;
     const players = data.players || [];
     const maxStat = Math.max(...STAT_LABELS.map(s => team[s.key] || 0), 1);
+    const allMet = STAT_LABELS.every(s => (team[s.key] || 0) >= 100);
 
     return (
         <main style={{ maxWidth: 1400, margin: '0 auto', padding: '2rem 2rem 4rem' }}>
+            <AnimatePresence>
+                {showAnim && (
+                    <LedgerFlagAnimation
+                        teamName={team.name}
+                        onClose={() => setShowAnim(false)}
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Header */}
             <header style={{ marginBottom: '3rem' }}>
                 <p style={{ fontFamily: 'Space Grotesk', fontSize: 11, color: '#ffbf00', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 8 }}>Guild Ledger</p>
